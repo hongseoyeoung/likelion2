@@ -3,6 +3,9 @@ class PostController < ApplicationController
     paramscheck
     @menu = params[:menu]
     @school = params[:school]
+
+    @posts = Dbpost.where("menu = ? AND school = ?",@menu,@school).reverse
+
   end
   
   def new
