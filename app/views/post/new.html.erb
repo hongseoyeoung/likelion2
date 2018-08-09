@@ -1,0 +1,31 @@
+<%=params%>
+
+<div class="container">
+<%# 제목, 내용, 학교,메뉴   %>
+    <%=form_for(@dbpost, url: post_create_path)  do |f|%>
+        <div>
+            <%= f.label :title %>
+            <%= f.text_field :title %>
+        </div>
+
+        <div>
+            <%= f.label :content %>
+            <%= f.text_field :content %>
+        </div>
+
+        <div>
+            <%= f.label :menu %>
+            <%= f.text_field :mm, :value => params[:menu], disabled: true%>
+            <%= f.hidden_field :menu, :value => params[:menu]%>
+        </div>
+        <div>
+            <%= f.label :school %>
+            <%= f.text_field :ss, :value => params[:school], disabled: true%>
+            <%= f.hidden_field :school, :value => params[:school]%>
+        </div>
+        <div>
+            <%= f.submit "올리기" %>
+        </div>
+    <%end%>
+
+</div>

@@ -22,7 +22,7 @@
             <div class="col-md-4">
                 <div class="card">
                 <%# 링크투로 학교와 메뉴의 파라미터를 보내야함. %>
-                    <%=link_to "javascript:callData(#{i})" do%>
+                    <%=link_to "javascript:callData(#{i})" do %>
                     <img src="img_avatar.png" alt="Avatar" style="width:100%"> <%end%>
                         <div class="container">
                         <h4><b>John Doe</b></h4> 
@@ -43,7 +43,7 @@
     {   
         var target = document.getElementById("schoolName");
         school = target.options[target.selectedIndex].value;
-        if(school=="nodata")
+        if(school=="nodata") 
         {
             alert("위치를 선택해주세요!");
             return;

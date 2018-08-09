@@ -1,2 +1,7 @@
-<%=@p%>
-asdf
+<%# 게시판 영역 %>
+<h1><%=@school%> <%=@menu%>게시판</h1>
+
+<%=%>
+
+
+<%=link_to '글쓰기', post_new_path(school: @school, menu: @menu)%>
