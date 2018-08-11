@@ -1,38 +1,43 @@
 
-<div class="container">
-    <%= link_to "/post/index?school=#{params[:school]}&menu=#{params[:menu]}" do%>
-        <h1><%=params[:school]%> <%=params[:menu]%></h1>
-    <%end%>
-</div>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
 
 
-
-<div class="container">
 <%# 제목, 내용, 학교,메뉴   %>
+
+    <%= link_to "/post/index?school=#{params[:school]}&menu=#{params[:menu]}" do%>
+        <h1 style="text-align:center;"><%=params[:school]%> <%=params[:menu]%></h1>
+    <%end%>
+    <br><br><br>
+    <h1 style="text-align:center;">글쓰기</h1>
     <%=form_for(@dbpost, url: post_create_path)  do |f|%>
-        <div>
-            <%= f.label :title %>
-            <%= f.text_field :title %>
+        <div class="form-group">
+            <%= f.label :title %> <br>
+            <%= f.text_field :title, class: "form-control" %>
         </div>
 
-        <div>
+        <div class="form-group">
             <%= f.label :content %>
-            <%= f.text_field :content %>
+            <%= f.text_field :content, class: "form-control" %>
         </div>
 
-        <div>
+        <div class="form-group">
             <%= f.label :menu %>
-            <%= f.text_field :mm, :value => params[:menu], disabled: true%>
+            <%= f.text_field :mm, :value => params[:menu], class: "form-control", disabled: true%>
             <%= f.hidden_field :menu, :value => params[:menu]%>
         </div>
-        <div>
+        <div class="form-group">
             <%= f.label :school %>
-            <%= f.text_field :ss, :value => params[:school], disabled: true%>
+            <%= f.text_field :ss, :value => params[:school],class: "form-control", disabled: true%>
             <%= f.hidden_field :school, :value => params[:school]%>
         </div>
-        <div>
-            <%= f.submit "올리기" %>
+        <div class="form-group" style="text-align:center;">
+            <%= f.submit "올리기", class: "btn btn-success"%>
         </div>
     <%end%>
+    </div>
 
+
+      <div class="col-md-4"></div>
 </div>

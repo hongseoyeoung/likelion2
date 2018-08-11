@@ -9,9 +9,11 @@ class PostController < ApplicationController
   end
   
   def new
+    logincheck
     @dbpost = Dbpost.new
   end
   def create
+    logincheck
     Dbpost.create(title: params[:dbpost][:title],
                   content: params[:dbpost][:content],
                   menu: params[:dbpost][:menu],
@@ -34,6 +36,18 @@ class PostController < ApplicationController
           html: "<script>
           alert('잘못된 접근입니다.');
           location.href='/';      
+          </script>".html_safe,
+          layout: 'application'
+        )
+      end
+    end
+
+    def logincheck
+      if !user_signed_in?
+        render(
+          html: "<script>
+          alert('로그인을 부탁드립니다.');
+          location.href='/users/sign_in';      
           </script>".html_safe,
           layout: 'application'
         )
