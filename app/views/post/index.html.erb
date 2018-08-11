@@ -1,5 +1,8 @@
 <%# 게시판 영역 %>
-<h1><%=@school%> <%=@menu%>게시판</h1>
+<%= link_to "/post/index?school=#{params[:school]}&menu=#{params[:menu]}" do%>
+    <h1><%=@school%> <%=@menu%> 먹자!</h1>
+<%end%>
+
 
 <% @posts.each do |p| %>
     <%= p.title%> |
