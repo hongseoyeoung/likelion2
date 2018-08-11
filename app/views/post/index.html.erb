@@ -1,14 +1,123 @@
 <%# 게시판 영역 %>
+<<<<<<< HEAD
 <%= link_to "/post/index?school=#{params[:school]}&menu=#{params[:menu]}" do%>
     <h1><%=@school%> <%=@menu%> 먹자!</h1>
 <%end%>
 
-
-<% @posts.each do |p| %>
-    <%= p.title%> |
-    <%= p.content%>
-    <br>
-<%end%>
+=======
 
 
-<%=link_to '글쓰기', post_new_path(school: @school, menu: @menu)%>
+<div class="container">
+<h1><%=@school%> <%=@menu%>게시판</h1>
+</div>
+<br>
+<div style="text-align:right;">
+	<%=link_to post_new_path(school: @school, menu: @menu) do%>
+		<button type="button" class="btn btn-default">글쓰기</button>
+	<%end%>
+</div>
+<div class="row">
+	<% @posts.each do |p| %>
+	<div class="col-md-4">
+		<a href=""> <!-- 클릭 시 링크 설정 -->
+			<div class="card">
+				<!-- 카드 헤더 -->
+				<div class="card-header">
+
+					<div class = "card-header-is_closed" > 
+
+						<div class = "card-header-text" > 모집중 </div > 
+
+						<div class = "card-header-number" > 2 / 5 </div > 
+					</div >
+				</div>
+
+				<!--  카드 바디 -->
+
+				<div class="card-body">
+
+					<!--  카드 바디 헤더 -->
+
+					<div class="card-body-header">
+
+						<h1> <%= p.title%></h1>
+
+						<p class="card-body-hashtag">#여수 #순천 #광양</p>
+
+						<p class = "card-body-nickname"> 
+
+										작성자: <%=User.find(p.user_id).name%>
+
+								</p>
+
+					</div>
+
+					<p class="card-body-description">
+
+						<%= p.content%> 
+
+					</p>
+					<!--  카드 바디 본문 -->
+
+					<!--  카드 바디 푸터 -->
+
+					<div class="card-body-footer">
+
+						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
+						<span class="glyphicon glyphicon-eye-open"> 38회
+
+						<span class="glyphicon glyphicon-comment"> 4개
+
+						<span class="glyphicon glyphicon-calendar"> 2018/04/12 
+
+					</div>
+				</div>
+			</div>
+>>>>>>> origin/bangseonho
+
+		</a>
+	</div>
+	<%end%>
+</div>
+
+	<div>
+		<div class="" style="width:300px; height:300px; margin:0 auto;"> 
+			<ul class="bxslider" id="bxslider"> 
+				<li>슬라이드될 컨텐츠 영역1 <img class="img-rounded" src="http://kinimage.naver.net/20171024_73/1508836721070jKYBl_JPEG/profile.jpg?type=f130_130" width="100%" height="100%"> </li> 
+				<li>슬라이드될 컨텐츠 영역2 <img class="img-rounded" src="http://kinimage.naver.net/20171024_73/1508836721070jKYBl_JPEG/profile.jpg?type=f130_130" width="100%" height="100%"> </li> 
+				<li>슬라이드될 컨텐츠 영역3 <img class="img-rounded" src="http://kinimage.naver.net/20171024_73/1508836721070jKYBl_JPEG/profile.jpg?type=f130_130" width="100%" height="100%"> </li> 
+			
+			</ul> 
+		</div> 
+		<div class="" id="slider-pager">
+		<br>
+			<ul style="text-align:center;"> 
+				<a data-slide-index="0" href="" onfocus="this.blur();" class="active">●</a>
+				<a data-slide-index="1" href="" onfocus="this.blur();" class="">●</a>
+				<a data-slide-index="2" href="" onfocus="this.blur();" class="">●</a>
+			</ul> 
+		</div> 
+
+	</div>
+  <!-- bxslider-4 --> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.min.js"></script> 
+  <script> 
+  $(document).ready(function(){ 
+         // bxslider 
+         var slider = $('.bxslider').bxSlider({ 
+                mode: 'horizontal', // 슬라이드 방식 ( horizontal, fade, vertical  중 선택 ) 
+                // mode: 'fade', 
+                auto: true, // 자동재생 유무 
+                controls:false, // 이전, 다음 컨트롤 유무 
+                autoHover: true, // 슬라이더 영역에 마우스 올렸을시 슬라이드를 멈출건지 여부 
+                pause: 3000, // 한 슬라이드가 멈춰있는 시간 
+                speed: 600, // 슬라이드애니메이션의 속도 
+                pager: true, // 페이징버튼 사용 여부 
+                pagerCustom: '#slider-pager', // 페이징 버튼이 들어있는 부모태그의 선택자 
+                // 버튼을 눌러 슬라이드를 이동시킨후 다시 슬라이드가 자동 재생되게 하는 옵션 
+                onSlideAfter: function($slideElement, oldIndex, newIndex){ 
+                       slider.startAuto(); 
+                } 
+         }); 
+  }); 
+  </script>

@@ -1,7 +1,9 @@
 <%# 광고로 사용할 배너, 슬라이딩 배너 필요 %>
 <div class="container">
-    <div class="col-md-4"><img src="dowon.png"></div>
-</div> <br><br>
+    <img src="dowon.png" style="width: 100%; height: 300px">
+</div> <br><br> %>
+
+
 
 
 <%# 메뉴 레이아웃 %>
@@ -10,32 +12,29 @@
   <div class="col-md-4">
   <select id="schoolName" class="form-control" onchange="getChangeSelect();">
         <option value="nodata">위치를 선택하세요.</option>
-        <option value="chosun">조선대</option>
-        <option value="jnu">전남대</option>
+        <option value="조선대">조선대</option>
+        <option value="전남대">전남대</option>
     </select></div>
   <div class="col-md-4"></div>
 </div><br><br\>
 
 <div class="container">
     <div class="row">
-        <%for i in 1..3%>
+        <%for i in 0..5%>
             <div class="col-md-4">
                 <div class="card">
                 <%# 링크투로 학교와 메뉴의 파라미터를 보내야함. %>
-                    <%=link_to "javascript:callData(#{i})" do %>
-                    <img src="img_avatar.png" alt="Avatar" style="width:100%"> <%end%>
+                    <%=link_to "javascript:callData(\"#{@arr[i]}\")" do %>
+                    <img src="<%= @sazin[i] %>.png" alt="#{@sazin}" style="width:100%">
+                    <%end%>
                         <div class="container">
-                        <h4><b>John Doe</b></h4> 
-                        <p>Architect & Engineer</p> 
+                        <h4><b><%= @arr[i] %></b></h4> 
                         </div>
                     </div>
                 </div>
         <%end%>  
     </div>
 </div>
-
-
-
 <script>
 
     // index->게시판으로 이동
