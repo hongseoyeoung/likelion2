@@ -20,15 +20,15 @@
 
 <div class="container">
     <div class="row">
-        <%for i in 0..2%>
+        <%for i in 0..5%>
             <div class="col-md-4">
                 <div class="card">
                 <%# 링크투로 학교와 메뉴의 파라미터를 보내야함. %>
                     <%=link_to "javascript:callData(\"#{@arr[i]}\")" do %>
-                    <img src="img_avatar.png" alt="Avatar" style="width:100%"> <%end%>
+                    <img src="<%= @sazin[i] %>.png" alt="#{@sazin}" style="width:100%">
+                    <%end%>
                         <div class="container">
-                        <h4><b>John Doe</b></h4> 
-                        <p>Architect & Engineer</p> 
+                        <h4><b><%= @arr[i] %></b></h4> 
                         </div>
                     </div>
                 </div>

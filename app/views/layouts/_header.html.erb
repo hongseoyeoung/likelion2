@@ -1,16 +1,18 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-      <%=link_to 'memo app', root_path, id: 'logo'%>
+      <%=link_to '덮집회의', root_path, id: 'logo'%>
       <nav>
         <ul class="nav navbar-nav navbar-right">
-            <li><%=link_to 'home','/'%></li>
-            <li><%=link_to 'new memo','#'%></li>
+            <li><%=link_to '공지사항', href='/post/notice' %></li>
             <% if user_signed_in?%>
-                <li><%=link_to 'sign out', destroy_user_session_path, method: :delete %></li>
+                <li><%=link_to '로그아웃', destroy_user_session_path, method: :delete %></li>
+                
             <%else%>
-                <li><%=link_to 'sign in', new_user_session_path%></li>
+                <li><%=link_to '로그인', new_user_session_path%></li>
+
             <%end%>
             
+            <li><%=link_to '고객센터', href='/post/customer' %></li>
         </ul>
       </nav>
     </div>
