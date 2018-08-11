@@ -1,21 +1,15 @@
 <%# 게시판 영역 %>
-<<<<<<< HEAD
 <%= link_to "/post/index?school=#{params[:school]}&menu=#{params[:menu]}" do%>
     <h1><%=@school%> <%=@menu%> 먹자!</h1>
 <%end%>
 
-=======
-
-
-<div class="container">
-<h1><%=@school%> <%=@menu%>게시판</h1>
-</div>
 <br>
 <div style="text-align:right;">
 	<%=link_to post_new_path(school: @school, menu: @menu) do%>
 		<button type="button" class="btn btn-default">글쓰기</button>
 	<%end%>
 </div>
+
 <div class="row">
 	<% @posts.each do |p| %>
 	<div class="col-md-4">
@@ -73,7 +67,6 @@
 					</div>
 				</div>
 			</div>
->>>>>>> origin/bangseonho
 
 		</a>
 	</div>
