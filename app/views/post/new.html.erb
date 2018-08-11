@@ -1,4 +1,11 @@
-<%=params%>
+
+<div class="container">
+    <%= link_to "/post/index?school=#{params[:school]}&menu=#{params[:menu]}" do%>
+        <h1><%=params[:school]%> <%=params[:menu]%></h1>
+    <%end%>
+</div>
+
+
 
 <div class="container">
 <%# 제목, 내용, 학교,메뉴   %>
