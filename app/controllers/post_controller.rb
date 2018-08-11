@@ -39,7 +39,4 @@ class PostController < ApplicationController
         )
       end
     end
-    def post_param
-      params.require(:dbpost).permit(:title,:content,:menu,:school)
-    end
 end
