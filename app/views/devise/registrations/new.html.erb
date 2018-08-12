@@ -9,6 +9,16 @@
    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
   </div>
 
+  <div class="btn-group" data-toggle="buttons">
+  <br>
+    <%= f.label :성별 %><br>
+      <%= f.label :남자 %>
+        <%= f.radio_button :gender, '남자', :checked => true %> 
+      <%= f.label :여자 %>
+       <%= f.radio_button :gender, '여자', :checked => true%> 
+  </div>
+
+
   <div class="field">
     <%= f.label :이메일 %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
