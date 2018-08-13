@@ -3,7 +3,7 @@
       <%=link_to '덮집회의', root_path, id: 'logo'%>
       <nav>
         <ul class="nav navbar-nav navbar-right">
-            <li><%=link_to '공지사항', href='/post/notice' %></li>
+            <li><%=link_to '공지사항', href='/notice/index' %></li>
             <% if user_signed_in?%>
                 <li><%=link_to '로그아웃', destroy_user_session_path, :data => {:confirm => 'Are you sure?'}, method: :delete %></li>
                 
@@ -12,7 +12,7 @@
 
             <%end%>
             
-            <li><%=link_to '고객센터', href='/post/customer' %></li>
+            <li><%=link_to '고객센터', href='/notice/index' %></li>
         </ul>
       </nav>
     </div>

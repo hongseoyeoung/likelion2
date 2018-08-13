@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813035327) do
+ActiveRecord::Schema.define(version: 20180813135832) do
 
   create_table "dbposts", force: :cascade do |t|
     t.string   "menu"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20180813035327) do
     t.string   "select_eat"
     t.string   "hope_gender"
     t.index ["user_id"], name: "index_dbposts_on_user_id"
+  end
+
+  create_table "notices", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

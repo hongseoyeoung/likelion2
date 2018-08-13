@@ -41,23 +41,23 @@
 				<!-- 카드 헤더 -->
 				<div class="card-header">
 
-					<div class = "card-header-is_closed" > 
+						<div class = "card-header-is_closed" > 
 
-						<div class = "card-header-text" > 모집중 </div > 
+							<div class = "card-header-text" > 모집중 </div > 
 
 						<div class = "card-header-number" > <%=p.now_cnt%> / <%=p.fill_cnt%> </div > 
 					</div >
 				</div>
 
-				<!--  카드 바디 -->
+					<!--  카드 바디 -->
 
-				<div class="card-body">
+					<div class="card-body">
 
-					<!--  카드 바디 헤더 -->
+						<!--  카드 바디 헤더 -->
 
-					<div class="card-body-header">
+						<div class="card-body-header">
 
-						<h1> <%= p.title%></h1>
+							<h1> <%= p.title%></h1>
 
 						<p class="card-body-hashtag">#<%=p.select_style%> #<%=p.select_eat%> 
 						<%if p.hope_gender == "동성"%>
@@ -68,37 +68,38 @@
 						</p>
 						
 
-						<p class = "card-body-nickname"> 
+							<p class = "card-body-nickname"> 
 
-										작성자: <%=User.find(p.user_id).name%>
+											작성자: <%=User.find(p.user_id).name%>
 
-								</p>
+									</p>
 
-					</div>
+						</div>
 
-					<p class="card-body-description">
+						<p class="card-body-description">
 
-						<%= p.content%> 
+							<%= p.content%> 
 
-					</p>
-					<!--  카드 바디 본문 -->
+						</p>
+						<!--  카드 바디 본문 -->
 
-					<!--  카드 바디 푸터 -->
+						<!--  카드 바디 푸터 -->
 
-					<div class="card-body-footer">
+						<div class="card-body-footer">
 
-						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
-						<span class="glyphicon glyphicon-eye-open"> 38회
+							<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
+							<span class="glyphicon glyphicon-eye-open"> 38회
 
-						<span class="glyphicon glyphicon-comment"> 4개
+							<span class="glyphicon glyphicon-comment"> 4개
 
-						<span class="glyphicon glyphicon-calendar"><%=p.created_at.strftime("%_m/%-d %p %l:%M")%>
+							<span class="glyphicon glyphicon-calendar"><%=p.created_at.strftime("%_m/%-d %p %l:%M")%>
 
+						</div>
 					</div>
 				</div>
-			</div>
 
-		</a>
+			</a>
+		</div>
+		<%end%>
 	</div>
-	<%end%>
 </div>

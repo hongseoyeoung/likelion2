@@ -1,0 +1,12 @@
+<h1>Notice#create</h1>
+<p>Find me in app/views/notice/create.html.erb</p>
+
+
+
+<%=form_for(Notice.new, url: '/notice/new', method:'post') do |f| %>
+  <%=f.label '제목' %>
+  <%=f.text_field :title %><br>
+  <%=f.label '내용' %>
+  <%=f.text_area :content %><br>
+  <%=f.submit '제출'%>
+<%end%>
