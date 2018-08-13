@@ -89,13 +89,10 @@
 </div>
 
 <script>
-    function select_eat_call(data)
+    function select_eat_call(data) 
     {
-    
-        // alert(data.name);
+        /* 배달음식과 매장투어를 선택시 배달옵션을 활성화할지 비활성화할지 선택해주는 함수. */
         var radio_btn = document.getElementsByName("dbpost[select_eat]");
-
-       
        if(data.value == "배달")
        {
            radio_btn[0].checked = false;
@@ -103,16 +100,21 @@
            radio_btn[0].disabled = false;
             radio_btn[1].disabled = false;
        }
-       else // 매장투어시 함께식사하는걸로 알고있어야함.
+       else // 매장투어시 함께식사하는걸로 알고있어야함. (활성화)
        {
-            radio_btn[0].disabled = true;
-            radio_btn[0].checked = true;
-            radio_btn[1].disabled = true;
+           var gender = document.getElementsByName("dbpost[hope_gender]");
+           radio_btn[0].checked = true;
+           for(var i = 0 ; i <2;i++)
+           {
+               radio_btn[i].disabled = true;
+                gender[i].disabled = false;
+           }
        }
     }
 
     function call_packing(data)
     {
+        /* 배달옵션에서 개별포장을 할시 성별이 무관해야함 */
         var radio_btn = document.getElementsByName("dbpost[hope_gender]");
         if(data.value == "포장") 
         {
@@ -124,7 +126,6 @@
         {
             for(var i = 0 ; i<2;i++){
                 radio_btn[i].disabled = false;
-                radio_btn[i].checked = false;
             }
         }
     }
