@@ -22,23 +22,23 @@
         <div class="form-group">
             <%= f.label :타입 %><br>
                 <%= f.label :배달음식 %>
-                        <%= f.radio_button :select_style, '배달', :checked => true %> 
+                        <%= f.radio_button :select_style, '배달', :checked => false, :onClick => "select_eat_call(this)"%> 
                 <%= f.label :매장투어 %>
-                    <%= f.radio_button :select_style, '투어', :checked => true%> 
+                    <%= f.radio_button :select_style, '투어', :checked => false, :onClick => "select_eat_call(this)"%> 
         </div>
         <%# select_eat 라디오 같이먹을것인지 나눠서 헤어질지 %>
         <div class="form-group">
             <%= f.label :배달옵션 %><br>
                 <%= f.label :함께식사 %>
-                        <%= f.radio_button :select_eat, '함께', :checked => true %> 
+                        <%= f.radio_button :select_eat, '함께', :checked => false, :onClick => "call_packing(this)"%> 
                 <%= f.label :개별포장 %>
-                    <%= f.radio_button :select_eat, '포장', :checked => true%> 
+                    <%= f.radio_button :select_eat, '포장', :checked => false, :onClick => "call_packing(this)" %> 
         </div>
         <%# 희망성별 %>
         <div class="form-group">
             <%= f.label :희망성별 %><br>
                 <%= f.label :동성 %>
-                        <%= f.radio_button :hope_gender, '동성', :checked => true %> 
+                        <%= f.radio_button :hope_gender, '동성', :checked => false %> 
                 <%= f.label :무관 %>
                     <%= f.radio_button :hope_gender, '무관', :checked => true%>            
         </div> <br>
@@ -87,3 +87,45 @@
 
       <div class="col-md-4"></div>
 </div>
+
+<script>
+    function select_eat_call(data)
+    {
+    
+        // alert(data.name);
+        var radio_btn = document.getElementsByName("dbpost[select_eat]");
+
+       
+       if(data.value == "배달")
+       {
+           radio_btn[0].checked = false;
+           radio_btn[1].checked = false;
+           radio_btn[0].disabled = false;
+            radio_btn[1].disabled = false;
+       }
+       else // 매장투어시 함께식사하는걸로 알고있어야함.
+       {
+            radio_btn[0].disabled = true;
+            radio_btn[0].checked = true;
+            radio_btn[1].disabled = true;
+       }
+    }
+
+    function call_packing(data)
+    {
+        var radio_btn = document.getElementsByName("dbpost[hope_gender]");
+        if(data.value == "포장") 
+        {
+            radio_btn[0].disabled = true;
+            radio_btn[1].checked = true;
+            radio_btn[1].disabled = true;
+        }
+        else
+        {
+            for(var i = 0 ; i<2;i++){
+                radio_btn[i].disabled = false;
+                radio_btn[i].checked = false;
+            }
+        }
+    }
+</script>
