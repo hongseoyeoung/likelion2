@@ -7,7 +7,12 @@ class PostController < ApplicationController
     @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, DateTime.now.end_of_day).reverse
 
   end
-  
+  def show
+    logincheck
+    @showpost = Dbpost.find(params[:id])
+
+  end
+
   def new
     logincheck
     @dbpost = Dbpost.new
@@ -26,7 +31,12 @@ class PostController < ApplicationController
                   menu: params[:dbpost][:menu],
                   school: params[:dbpost][:school],
                   user_id: current_user.id,
-                  start_time: d
+                  start_time: d,
+              fill_cnt: params[:dbpost][:fill_cnt],
+              select_style: params[:dbpost][:select_style],
+              select_eat:params[:dbpost][:select_eat],
+              hope_gender:params[:dbpost][:hope_gender],
+
                   )
     redirect_to "/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}"
   end

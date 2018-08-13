@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20180813035327) do
     t.string   "select_style"
     t.string   "select_eat"
     t.string   "hope_gender"
-    t.string   "place"
     t.index ["user_id"], name: "index_dbposts_on_user_id"
   end
 

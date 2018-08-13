@@ -6,6 +6,5 @@ class AddForhereToDbpost < ActiveRecord::Migration[5.0]
     add_column :dbposts, :select_style, :string
     add_column :dbposts, :select_eat,  :string
     add_column :dbposts, :hope_gender, :string
-    add_column :dbposts, :place, :string
   end
 end

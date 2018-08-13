@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'post/index'
   get 'post/notice'
   get 'post/new'
+  get 'post/show'
   post 'post/create'
   get 'post/customer'
   get 'post/mypage'

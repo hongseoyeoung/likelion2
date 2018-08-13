@@ -62,7 +62,7 @@
         <%# fill_cnt 목표인원 %>
         <div class="form-group"> 
             <%= f.label :희망인원 %>
-            <%= f.text_field :fill_cnt ,class: "form-control", placeholder: "숫자로 입력해주세요! (4, 5...)"%>
+            <%= f.number_field :fill_cnt, placeholder: "숫자를 입력해주세요. (2, 3, 5)" %>
         </div>
 
         <%# start_time 시작시간 datetime 폼 %>

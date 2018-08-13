@@ -36,7 +36,7 @@
 <div class="row">
 	<% @posts.each do |p| %>
 	<div class="col-md-4">
-		<a href=""> <!-- 클릭 시 링크 설정 -->
+		<a href="/post/show?id=<%=p.id%>"> <!-- 클릭 시 링크 설정 -->
 			<div class="card">
 				<!-- 카드 헤더 -->
 				<div class="card-header">
@@ -45,7 +45,7 @@
 
 						<div class = "card-header-text" > 모집중 </div > 
 
-						<div class = "card-header-number" > 2 / 5 </div > 
+						<div class = "card-header-number" > <%=p.now_cnt%> / <%=p.fill_cnt%> </div > 
 					</div >
 				</div>
 
@@ -59,7 +59,14 @@
 
 						<h1> <%= p.title%></h1>
 
-						<p class="card-body-hashtag">#여수 #순천 #광양</p>
+						<p class="card-body-hashtag">#<%=p.select_style%> #<%=p.select_eat%> 
+						<%if p.hope_gender == "동성"%>
+						#<%=User.find(p.user_id).gender%>						
+						<%else%>
+						#<%=p.hope_gender%>
+						<%end%>
+						</p>
+						
 
 						<p class = "card-body-nickname"> 
 
