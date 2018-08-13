@@ -4,7 +4,7 @@ class PostController < ApplicationController
     @menu = params[:menu]
     @school = params[:school]
 
-    @posts = Dbpost.where("menu = ? AND school = ?",@menu,@school).reverse
+    @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, DateTime.now.end_of_day).reverse
 
   end
   
@@ -14,11 +14,19 @@ class PostController < ApplicationController
   end
   def create
     logincheck
+
+
+    # 
+    t= Time.now.in_time_zone('Seoul')
+    d = DateTime.new(t.year , t.month ,t.day, params[:hour].to_i ,params[:min].to_i ,0)
+
+
     Dbpost.create(title: params[:dbpost][:title],
                   content: params[:dbpost][:content],
                   menu: params[:dbpost][:menu],
                   school: params[:dbpost][:school],
-                  user_id: current_user.id
+                  user_id: current_user.id,
+                  start_time: d
                   )
     redirect_to "/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}"
   end
