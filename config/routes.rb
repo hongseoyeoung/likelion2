@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'notice/index'
+
+  get 'notice/create'
+
+  post 'notice/new'
+
+  get 'notice/edit'
+
+  get 'notice/delete'
+
   get 'post/index'
   get 'post/notice'
   get 'post/new'
