@@ -1,4 +1,4 @@
 class Dbpost < ApplicationRecord
   belongs_to :user
-  belongs_to :info
+  has_one :info
 end

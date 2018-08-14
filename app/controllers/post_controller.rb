@@ -12,10 +12,28 @@ class PostController < ApplicationController
     logincheck
     @dbpost = Dbpost.new
   end
+
+
   def join
     logincheck
-      
+    post_data = Dbpost.find(params[:p_id])
+    if post_data.fill_cnt <= post_data.now_cnt # 방에 모든사람이 채워졌을때
+      render(html: "<script> alert('정원이 찼습니다.');location.href='/post/index?school=#{post_data.school}&menu=#{post_data.menu}'; </script>".html_safe, layout: 'application') and return
+    end
+    if current_user.info_id # 지금 세션의 유저가 다른방에 들어가있는지 확인
+      render(html: "<script> alert('이미 참여 중입니다.');location.href='/post/index?school=#{post_data.school}&menu=#{post_data.menu}'; </script>".html_safe, layout: 'application') and return
+    end
+
+    # 게시글을 불러오고 참여인원수 증가 + 현재 참여인원 ID를 Info DB에 추가함.
+
+    post_data.now_cnt = post_data.now_cnt+1
+    current_user.info_id = post_data.info.id
+    current_user.save
+    post_data.save
+
+    redirect_to "/post/index?school=#{post_data.school}&menu=#{post_data.menu}"
   end
+
 
   def create
     logincheck
@@ -26,18 +44,21 @@ class PostController < ApplicationController
     d = DateTime.new(t.year , t.month ,t.day, params[:hour].to_i ,params[:min].to_i ,0)
 
 
-    Dbpost.create(title: params[:dbpost][:title],
+    dp = Dbpost.create(title: params[:dbpost][:title],
                   content: params[:dbpost][:content],
                   menu: params[:dbpost][:menu],
                   school: params[:dbpost][:school],
                   user_id: current_user.id,
                   start_time: d,
-              fill_cnt: params[:dbpost][:fill_cnt],
-              select_style: params[:dbpost][:select_style],
-              select_eat:params[:dbpost][:select_eat],
-              hope_gender:params[:dbpost][:hope_gender],
+                 fill_cnt: params[:dbpost][:fill_cnt],
+                 select_style: params[:dbpost][:select_style],
+                  select_eat:params[:dbpost][:select_eat],
+                 hope_gender:params[:dbpost][:hope_gender],
+                )
+    Info.create(dbpost_id: dp.id)
+    current_user.info_id = Info.last.id
+    current_user.save
 
-                  )
     redirect_to "/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}"
   end
 
@@ -57,18 +78,14 @@ class PostController < ApplicationController
           </script>".html_safe,
           layout: 'application'
         )
+        return
       end
     end
 
     def logincheck
       if !user_signed_in?
-        render(
-          html: "<script>
-          alert('로그인을 부탁드립니다.');
-          location.href='/users/sign_in';      
-          </script>".html_safe,
-          layout: 'application'
-        )
+        flash[:notice]  = "로그인이 필요합니다."
+        redirect_to new_user_session_url and return
       end
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180814094727) do
+ActiveRecord::Schema.define(version: 20180814094632) do
 
   create_table "dbposts", force: :cascade do |t|
     t.string   "menu"
@@ -26,15 +26,11 @@ ActiveRecord::Schema.define(version: 20180814094727) do
     t.string   "select_style"
     t.string   "select_eat"
     t.string   "hope_gender"
-    t.integer  "info_id"
-    t.index ["info_id"], name: "index_dbposts_on_info_id"
     t.index ["user_id"], name: "index_dbposts_on_user_id"
   end
 
   create_table "infos", force: :cascade do |t|
     t.integer  "dbpost_id"
-
-    
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dbpost_id"], name: "index_infos_on_dbpost_id"
