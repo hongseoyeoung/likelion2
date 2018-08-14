@@ -14,7 +14,7 @@
     <%=form_for(@dbpost, url: post_create_path)  do |f|%>
         <div class="form-group">
             <%= f.label :title %> <br>
-            <%= f.text_field :title, class: "form-control" %>
+            <%= f.text_field :title, class: "form-control", required: "required"%>
         </div>
         
         
@@ -62,19 +62,21 @@
         <%# fill_cnt 목표인원 %>
         <div class="form-group"> 
             <%= f.label :희망인원 %>
-            <%= f.number_field :fill_cnt, placeholder: "숫자를 입력해주세요. (2, 3, 5)" %>
+            <%= f.number_field :fill_cnt, placeholder: "숫자를 입력해주세요. (2, 3, 5)", class: "form-control", within: 2...11, required: "required"%>
         </div>
 
         <%# start_time 시작시간 datetime 폼 %>
         <div class="form-group">
             <%= f.label :희망시간 %>
-            <%=select_tag "hour", "<option selected='selected'>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option>".html_safe, class: "form-control"%>
-            <%=select_tag "min","<option selected='selected'>00</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option>".html_safe, class: "form-control"%>
-        </div>
+            <br>
 
+             <%=number_field_tag 'hour', nil, within: 1...13, required: "required"%>
+             <%=number_field_tag 'min', nil, within: 0...60, required: "required"%>
+        </div>
+        
         <div class="form-group">
             <%= f.label :content%>
-            <%= f.text_area :content, class: "form-control", placeholder: "만날위치, 세부메뉴 등을 작성해주세요!"%>
+            <%= f.text_area :content, class: "form-control", placeholder: "만날위치, 세부메뉴 등을 작성해주세요!", required: "required"%>
         </div>
 
 
@@ -90,6 +92,11 @@
 </div>
 
 <script>
+
+    function button_clicked(data)
+    {
+        document.getElementById(data).className = "btn btn-primary active";
+    }
     function select_eat_call(data) 
     {
         /* 배달음식과 매장투어를 선택시 배달옵션을 활성화할지 비활성화할지 선택해주는 함수. */
