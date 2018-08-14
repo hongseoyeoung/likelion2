@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813135832) do
+ActiveRecord::Schema.define(version: 20180814094727) do
 
   create_table "dbposts", force: :cascade do |t|
     t.string   "menu"
@@ -26,7 +26,18 @@ ActiveRecord::Schema.define(version: 20180813135832) do
     t.string   "select_style"
     t.string   "select_eat"
     t.string   "hope_gender"
+    t.integer  "info_id"
+    t.index ["info_id"], name: "index_dbposts_on_info_id"
     t.index ["user_id"], name: "index_dbposts_on_user_id"
+  end
+
+  create_table "infos", force: :cascade do |t|
+    t.integer  "dbpost_id"
+
+    
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dbpost_id"], name: "index_infos_on_dbpost_id"
   end
 
   create_table "notices", force: :cascade do |t|
@@ -53,7 +64,9 @@ ActiveRecord::Schema.define(version: 20180813135832) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "gender"
+    t.integer  "info_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["info_id"], name: "index_users_on_info_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

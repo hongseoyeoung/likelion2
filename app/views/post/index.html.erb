@@ -36,7 +36,7 @@
 <div class="row">
 	<% @posts.each do |p| %>
 	<div class="col-md-4">
-		<a href="/post/show?id=<%=p.id%>"> <!-- 클릭 시 링크 설정 -->
+		<%=link_to post_join_path(p_id: p.id) do%>
 			<div class="card">
 				<!-- 카드 헤더 -->
 				<div class="card-header">
@@ -98,7 +98,7 @@
 					</div>
 				</div>
 
-			</a>
+			<%end%>
 		</div>
 		<%end%>
 	</div>

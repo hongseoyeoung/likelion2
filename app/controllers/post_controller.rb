@@ -7,16 +7,16 @@ class PostController < ApplicationController
     @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, DateTime.now.end_of_day).reverse
 
   end
-  def show
-    logincheck
-    @showpost = Dbpost.find(params[:id])
-
-  end
 
   def new
     logincheck
     @dbpost = Dbpost.new
   end
+  def join
+    logincheck
+      
+  end
+
   def create
     logincheck
 
