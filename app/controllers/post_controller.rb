@@ -9,13 +9,21 @@ class PostController < ApplicationController
   end
 
   def new
-    logincheck
+    if logincheck
+      return
+    end
+
+
     @dbpost = Dbpost.new
   end
 
 
   def join
-    logincheck
+    if logincheck
+      return
+    end
+
+
     post_data = Dbpost.find(params[:p_id])
     if post_data.fill_cnt <= post_data.now_cnt # 방에 모든사람이 채워졌을때
       render(html: "<script> alert('정원이 찼습니다.');location.href='/post/index?school=#{post_data.school}&menu=#{post_data.menu}'; </script>".html_safe, layout: 'application') and return
@@ -36,7 +44,9 @@ class PostController < ApplicationController
 
 
   def create
-    logincheck
+    if logincheck
+      return
+    end
 
 
     # 
@@ -84,8 +94,13 @@ class PostController < ApplicationController
 
     def logincheck
       if !user_signed_in?
-        flash[:notice]  = "로그인이 필요합니다."
-        redirect_to new_user_session_url and return
+        render(
+          html: "<script>
+          alert('로그인이 필요합니다.');
+          location.href='/users/sign_in';      
+          </script>".html_safe,
+          layout: 'application'
+        ) and return true
       end
     end
 end
