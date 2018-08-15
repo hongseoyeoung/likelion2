@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
 
 
+  #user
+  get 'passwords/edit' 
+
 
   # deivse gem
   devise_for :users

@@ -1,3 +1,5 @@
+<%=params%>
+<%=params[:choice]%>
 <div style="padding-top: 10%;">
 	<div class="container">
 		<table class="table table-bordered table-hover text-center">
@@ -11,7 +13,7 @@
 			<tbody>
 				<%@notices.each do |x|%>
 				<tr>
-					<td><%=x.title%></td>
+					<td><%=x.title%>'</td>
 					<td><%=User.find(x.user_id).name%></td>
 					<td><%=x.created_at%></td>
 				</tr>r
@@ -19,7 +21,7 @@
 			</tbody>
 		</table>
 
-		<a href="/notice/create" class="btn btn-default pull-right">글쓰기</a>
+		<a href="/notice/create?choice=<%=@temp%>" class="btn btn-default pull-right">글쓰기</a>
 
 		<div class="text-center">
 			<ul class="pagination">

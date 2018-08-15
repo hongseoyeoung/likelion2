@@ -3,14 +3,19 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   
+  <div class="nick_name">
+    <%= f.label :닉네임 %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.submit "중복확인" %>
+
+  </div>
 
   <div class="form-group">
    <%= f.label :이름 %>
-   <%= f.text_field :name, autofocus: true, class: 'form-control' %>
   </div>
 
+
   <div class="btn-group" data-toggle="buttons">
-  <br>
     <%= f.label :성별 %><br>
       <%= f.label :남자 %>
         <%= f.radio_button :gender, '남자', :checked => true %> 
@@ -22,7 +27,9 @@
   <div class="field">
     <%= f.label :이메일 %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.submit "중복확인" %>
   </div>
+
 
   <div class="field">
     <%= f.label :비밀번호 %>

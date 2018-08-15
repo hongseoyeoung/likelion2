@@ -1,12 +1,16 @@
-<h1>Notice#create</h1>
+<div class="container">
+	<h1 style="margin-top: 5px;"><%=params[:choice]%></h1>
+</div>
 <p>Find me in app/views/notice/create.html.erb</p>
 
 
-
+<div class="container" style='margin-left: 30px;'>
 <%=form_for(Notice.new, url: '/notice/new', method:'post') do |f| %>
-  <%=f.label '제목' %>
+  <%=f.label '제목' %><br>
   <%=f.text_field :title %><br>
-  <%=f.label '내용' %>
+  <%=f.label '내용' %><br>
   <%=f.text_area :content %><br>
-  <%=f.submit '제출'%>
+  <input type='submit' value='작성' data-confirm= '작성하시겠습니까?'></input>
+  <%= hidden_field_tag 'choice', params[:choice] %>
 <%end%>
+</div>
