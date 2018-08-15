@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   post 'post/create'
   get 'post/customer'
   get 'post/mypage'
-
-
+  get 'post/show'
+  post 'post/delete_join'
 
 
 
