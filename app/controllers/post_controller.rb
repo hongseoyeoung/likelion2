@@ -76,8 +76,6 @@ class PostController < ApplicationController
 
 
 
-
-
   private
     def paramscheck
       if !(params[:school] && params[:menu])

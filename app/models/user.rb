@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :notices
   has_many :dbposts
   has_many :infos
+  has_many :comments
 end

@@ -19,9 +19,8 @@ Rails.application.routes.draw do
   get 'post/customer'
   get 'post/mypage'
 
-
-
-
+  #user
+  get 'passwords/edit' 
 
 
   # deivse gem
