@@ -22,7 +22,11 @@
 
             <%end%>
             
-            <li><%=link_to '고객센터', href='/notice/index?choice=고객센터' %></li>
+            <li><%=link_to '고객센터', href='/notice/index' %></li>
+            
+            <% if user_signed_in?%>
+              <li><%=link_to '마이페이지', href='/mypage/index' %></li>
+            <%end%>
         </ul>
       </nav>
     </div>

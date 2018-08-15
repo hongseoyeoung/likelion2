@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'mypage/index'
+
+  get 'mypage/edit'
+  
+  get 'mypage/modify'
+  
   root 'home#index'
 
 
@@ -29,7 +35,6 @@ Rails.application.routes.draw do
 
 
   # deivse gem
-  devise_for :users
-  
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, :skip => [:registrations]
+  # For details on the DSL avaislable within this file, see http://guides.rubyonrails.org/routing.html
 end
