@@ -33,7 +33,7 @@
 	<%end%>
 </div>
 </div>
-<div class="row">
+<div class="container">
 	<% @posts.each do |p| %>
 	<div class="col-md-4">
 		<%=link_to post_show_path(p_id: p.id) do%>
@@ -44,7 +44,7 @@
 						<div class = "card-header-is_closed" > 
 
 							<div class = "card-header-text" > 
-							모집중> 
+							모집중
 						</div > 
 
 						<div class = "card-header-number" > <%=p.now_cnt%> / <%=p.fill_cnt%> </div > 

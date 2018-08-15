@@ -4,7 +4,7 @@
       <nav>
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in?%>
-            <li style="margin-top: 14px;"><p style="color: white"><%= current_user.id %>님 환영합니다</p></li>
+            <li style="margin-top: 14px;"><p style="color: white"><%= current_user.name %>님 환영합니다</p></li>
 
           <% else %>
             <li style="margin-top: 14px;"><p style="color: white">안녕하세요?</p></li>
