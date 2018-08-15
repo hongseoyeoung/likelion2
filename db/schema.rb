@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20180814094632) do
     t.string   "school"
     t.string   "title"
     t.string   "content"
-    t.integer  "user_id" # 글쓴이의 ID
+    t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "now_cnt",      default: 1
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20180814094632) do
   end
 
   create_table "infos", force: :cascade do |t|
-    t.integer  "dbpost_id" # 게시글과 1:1 관계
+    t.integer  "dbpost_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dbpost_id"], name: "index_infos_on_dbpost_id"
@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(version: 20180814094632) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notices_on_user_id"
   end
-  # 프로필 사진, 
-  # 참여했떤 글을 볼 수 있게
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email",                  default: "", null: false

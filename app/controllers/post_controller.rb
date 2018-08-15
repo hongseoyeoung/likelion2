@@ -38,11 +38,36 @@ class PostController < ApplicationController
 
     post_data.now_cnt = post_data.now_cnt+1
     current_user.info_id = post_data.info.id
+
     current_user.save
     post_data.save
 
     redirect_to "/post/index?school=#{post_data.school}&menu=#{post_data.menu}"
   end
+
+
+
+  def delpage
+    data = Dbpost.find(params[:p_id])
+    school = data.school
+    menu = data.menu
+
+    # 유저들의 info_id값을 변경
+    
+    data.info.users.each do |x|
+      x.info_id = nil
+      x.save
+    end
+
+
+    data.info.destroy
+    data.destroy
+    
+    redirect_to "/post/index?school=#{school}&menu=#{menu}"
+  end
+
+
+
 
 
   def create

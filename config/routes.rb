@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'post/mypage'
   get 'post/show'
   post 'post/delete_join'
+  post 'post/delpage'
 
 
 
