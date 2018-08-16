@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   post 'post/delpage'
 
 
+  #comment
+  post 'comment/create'
+  post 'comment/destroy'
 
   #user
   get 'passwords/edit' 

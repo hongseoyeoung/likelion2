@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815113359) do
+ActiveRecord::Schema.define(version: 20180816044010) do
 
   create_table "comments", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "owner_id"
-    t.integer  "owner_id_id"
-    t.index ["owner_id"], name: "index_comments_on_owner_id"
-    t.index ["owner_id_id"], name: "index_comments_on_owner_id_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.integer  "dbpost_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dbpost_id"], name: "index_comments_on_dbpost_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "dbposts", force: :cascade do |t|

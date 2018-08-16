@@ -1,16 +1,19 @@
 class CommentController < ApplicationController
 	def create
-		comment = Comment.new
-		comment.content = params[:comment_content]
-		comment.post_id = params[:post_id]
-		comment.save
-		redirect_to "/post/#{comment.post.id}"
-		
+		c = Comment.new
+		c.content = params[:comment][:content]
+		c.dbpost_id = params[:comment][:post_id]
+		c.user_id = current_user.id
+		c.save
+		redirect_to "/post/show?p_id=#{c.dbpost.id}"
 	end
+
+
 
 	def destroy
 		comment = Comment.find params[:id]
+		temp = comment.dbpost.id
 		comment.destroy
-		redirect_to '/post/#{comment.post.id}'
+		redirect_to "/post/show?p_id=#{temp}"
 	end
 end
