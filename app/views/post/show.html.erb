@@ -1,21 +1,11 @@
-<%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
-    <h1><%=@postdata.school%> <%=@postdata.menu%>(뒤로가기)</h1>
-<%end%>
+<div class="container">
+  <%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
+      <h1><%=@postdata.school%> <%=@postdata.menu%>(뒤로가기)</h1>
+  <%end%>
+</div>
 
 
 
-<%if !current_user.info_id%>
-     <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
-    <%elsif @postdata.user_id == current_user.id%>
-        <%=link_to '삭제', post_delpage_path(p_id: params[:p_id]), method: :post%>
-        <%=link_to '수정', post_edit_path(params[:p_id])%>
-        
-        <%# 여기서는 글쓴사람이 글에 들어왔을때 %>
-
-    <%elsif current_user.info_id == @postdata.info.id%>
-        <%=link_to '방 나가기', post_delete_join_path(p_id: params[:p_id]), method: :post ,:data => { :confirm => '나가시겠습니까?'} %>
-
-<%end%>
 
  <!-- Page Content -->
     <div class="container">
@@ -26,18 +16,18 @@
         <div class="col-lg-8">
 
           <!-- Title -->
-          <h1 class="mt-4">Post Title</h1>
+          <h1 class="mt-4"><%=@postdata.title%></h1>
 
           <!-- Author -->
           <p class="lead">
             by
-            <a href="#">Start Bootstrap</a>
+            <a href="#"><%=@postdata.user.name%></a>
           </p>
 
           <hr>
 
           <!-- Date/Time -->
-          <p>작성일: January 1, 2018 at 12:00 PM</p>
+          <p>작성일 : <%=@postdata.created_at%></p>
 
           <hr>
 
@@ -49,16 +39,27 @@
           <!-- Post Content -->
           <p class="lead">글 내용</p>
 
-          <p>글 내용</p>
-
-          <p>글 내용</p>
 
           <blockquote class="blockquote">
-            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">Someone famous in
-              <cite title="Source Title">Source Title</cite>
-            </footer>
+            <p class="mb-0"><%=@postdata.content%></p>
+            <br>
+            
+            <%if !current_user.info_id%>
+              <%# 참여가 가능한경우ㄴ %>
+              <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
+
+              <%# 작성자인경우 %>
+              <%elsif @postdata.user_id == current_user.id%>
+                 <%=link_to '편집', post_edit_path(params[:p_id])%>
+                  <%=link_to '삭제', post_delpage_path(p_id: params[:p_id]), method: :post%>
+                  
+                  
+                  <%# 여기서는 글쓴사람이 글에 들어왔을때 %>
+              <%elsif current_user.info_id == @postdata.info.id%>
+                  <%=link_to '방 나가기', post_delete_join_path(p_id: params[:p_id]), method: :post ,:data => { :confirm => '나가시겠습니까?'} %>
+          <%end%>
           </blockquote>
+          
 
           <hr>
 
@@ -78,35 +79,36 @@
 
          <div class="container">
             <div class="card-body">
-                <div class="form-group">
-                <%=form_for(Comment.new, url: "/comment/create") do |f|%>
+                <%=form_for(Comment.new, url: "/comment/create",  html: {class: "form-inline"}) do |f|%> 
+                  <div class="form-group">
                     <%=f.text_field :content, class: "form-control"%>
+                  </div>
                     <%=f.hidden_field :post_id, :value => @postdata.id%>
+                   <div class="form-group"> 
                     <%=f.submit '제출', class: "submit"%>
+                    </div>
                 <%end%>
-                </div>
-            
+
             </div>
           </div>
           <%end%>
-          <!-- Single Comment -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-          </div>
+          <%if current_user.info_id == @postdata.info.id%>
+            <%@postdata.comments.each do |c|%>
+               <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                 <%if current_user.id == c.user_id%>
+                        <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
+                  <%end%>
+                <div class="media-body">
+                <h5 class="mt-0"><%=c.user.name%></h5>
+                <%=c.content%> 
+                   
+                  </div>
+                </div>
+                <br>
+            <%end%>
+         <%end%>
 
-          <!-- Comment with nested comments -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">닉네임</h5>
-              내용내용
-
-            </div>
-          </div>
 
         </div>
 
@@ -117,17 +119,6 @@
 <br><br>
 
 <%# 방 접속자만 댓글을 볼 수 있다. %>
-<%if current_user.info_id == @postdata.info.id%>
-
-    <%@postdata.comments.each do |c|%>
-            <%=c.user.name%> |
-            <%=c.content%> 
-            <%if current_user.id == c.user_id%>
-                <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
-            <%end%>
-        <br>
-    <%end%>
-<%end%>
 
 <table>
     <tr> 
