@@ -1,2 +1,13 @@
-<h1>Notice#edit</h1>
-<p>Find me in app/views/notice/edit.html.erb</p>
+<h1><%= @notice.choice %></h1>
+<form action='notices_update'>
+	
+	<input name='notice_id' type='hidden' value='<%= @notice.id %>'></input>
+	<h2>제목</h2>
+	<input name='input_title' type='text' value='<%= @notice.title %>'></input>
+	<h3>내용</h3>
+	<input name='input_content' type='text' value='<%= @notice.content %>'></input>
+	<input name='notice_choice' type='hidden' value='<%= @notice.choice %>'></input>
+	<input type='submit', value="수정", data-confirm= '수정하시겠습니까?'></input>
+
+<!--#value는 원래 있던거 소환
+ --></form>
