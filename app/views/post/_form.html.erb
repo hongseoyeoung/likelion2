@@ -1,0 +1,140 @@
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+
+
+<%# 제목, 내용, 학교,메뉴   %>
+
+    <%= link_to "/post/index?school=#{params[:school]}&menu=#{params[:menu]}" do%>
+        <h1 style="text-align:center;"><%=params[:school]%> <%=params[:menu]%></h1>
+    <%end%>
+    <br><br><br>
+    <h1 style="text-align:center;">글쓰기</h1>
+    <%=form_for(dbpost, url: url)  do |f|%>
+        <div class="form-group">
+            <%= f.label :title %> <br>
+            <%= f.text_field :title, class: "form-control", required: "required"%>
+        </div> 
+        
+        
+        <%# select_style 라디오버튼 (배달?투어?) %>
+        <div class="form-group">
+            <%= f.label :타입 %><br>
+                <%= f.label :배달음식 %>
+                        <%= f.radio_button :select_style, '배달', :checked => false, :onClick => "select_eat_call(this)"%> 
+                <%= f.label :매장투어 %>
+                    <%= f.radio_button :select_style, '투어', :checked => false, :onClick => "select_eat_call(this)"%> 
+        </div>
+        <%# select_eat 라디오 같이먹을것인지 나눠서 헤어질지 %>
+        <div class="form-group">
+            <%= f.label :배달옵션 %><br>
+                <%= f.label :함께식사 %>
+                        <%= f.radio_button :select_eat, '함께', :checked => false, :onClick => "call_packing(this)"%> 
+                <%= f.label :개별포장 %>
+                    <%= f.radio_button :select_eat, '포장', :checked => false, :onClick => "call_packing(this)" %> 
+        </div>
+        <%# 희망성별 %>
+        <div class="form-group">
+            <%= f.label :희망성별 %><br>
+                <%= f.label :동성 %>
+                        <%= f.radio_button :hope_gender, '동성', :checked => false %> 
+                <%= f.label :무관 %>
+                    <%= f.radio_button :hope_gender, '무관', :checked => true%>            
+        </div> <br>
+
+
+        <div class="form-group">
+            <%= f.label :menu %>
+            <%= f.text_field :mm, :value => params[:menu], class: "form-control", disabled: true%>
+            <%= f.hidden_field :menu, :value => params[:menu]%>
+        </div>
+
+
+
+        <div class="form-group">
+            <%= f.label :school %>
+            <%= f.text_field :ss, :value => params[:school],class: "form-control", disabled: true%>
+            <%= f.hidden_field :school, :value => params[:school]%>
+        </div>
+
+
+        <%# fill_cnt 목표인원 %>
+        <div class="form-group"> 
+            <%= f.label :희망인원 %>
+            <%= f.number_field :fill_cnt, placeholder: "숫자를 입력해주세요. (2, 3, 5)", class: "form-control", within: 2...11, required: "required"%>
+        </div>
+
+        <%# start_time 시작시간 datetime 폼 %>
+        <div class="form-group">
+            <%= f.label :희망시간 %>
+            <br>
+
+             <%=number_field_tag 'hour', nil, within: 1...13, required: "required"%>
+             <%=number_field_tag 'min', nil, within: 0...60, required: "required"%>
+        </div>
+        
+        <div class="form-group">
+            <%= f.label :content%>
+            <%= f.text_area :content, class: "form-control", placeholder: "만날위치, 세부메뉴 등을 작성해주세요!", required: "required"%>
+        </div>
+
+
+
+        <div class="form-group" style="text-align:center;">
+            <%= f.submit "올리기", class: "btn btn-success"%>
+        </div>
+    <%end%>
+    </div>
+
+
+      <div class="col-md-4"></div>
+</div>
+
+<script>
+
+    function button_clicked(data)
+    {
+        document.getElementById(data).className = "btn btn-primary active";
+    }
+    function select_eat_call(data) 
+    {
+        /* 배달음식과 매장투어를 선택시 배달옵션을 활성화할지 비활성화할지 선택해주는 함수. */
+        var radio_btn = document.getElementsByName("dbpost[select_eat]");
+       if(data.value == "배달")
+       {
+           radio_btn[0].checked = false;
+           radio_btn[1].checked = false;
+           radio_btn[0].disabled = false;
+            radio_btn[1].disabled = false;
+       }
+       else // 매장투어시 함께식사하는걸로 알고있어야함. (활성화)
+       {
+           var gender = document.getElementsByName("dbpost[hope_gender]");
+           radio_btn[0].checked = true;
+           for(var i = 0 ; i <2;i++)
+           {
+               radio_btn[i].disabled = true;
+                gender[i].disabled = false;
+           }
+       }
+    }
+
+    function call_packing(data)
+    {
+        /* 배달옵션에서 개별포장을 할시 성별이 무관해야함 */
+        var radio_btn = document.getElementsByName("dbpost[hope_gender]");
+        if(data.value == "포장") 
+        {
+            radio_btn[0].disabled = true;
+            radio_btn[1].checked = true;
+            radio_btn[1].disabled = true;
+        }
+        else
+        {
+            for(var i = 0 ; i<2;i++){
+                radio_btn[i].disabled = false;
+            }
+        }
+    }
+</script>

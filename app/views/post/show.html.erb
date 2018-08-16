@@ -8,7 +8,7 @@
      <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
     <%elsif @postdata.user_id == current_user.id%>
         <%=link_to '삭제', post_delpage_path(p_id: params[:p_id]), method: :post%>
-        <%=link_to '수정'%>
+        <%=link_to '수정', post_edit_path(params[:p_id])%>
         
         <%# 여기서는 글쓴사람이 글에 들어왔을때 %>
 

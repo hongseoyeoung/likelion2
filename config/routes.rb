@@ -25,8 +25,10 @@ Rails.application.routes.draw do
   get 'post/customer'
   get 'post/mypage'
   get 'post/show'
+  get 'post/edit/:id' => 'post#edit', :as => 'post_edit'
   post 'post/delete_join'
   post 'post/delpage'
+  post 'post/update'
 
 
   #comment

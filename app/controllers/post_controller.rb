@@ -1,4 +1,6 @@
-class PostController < ApplicationController
+class PostController < ApplicationController 
+  before_action :logincheck, only: [:create, :delete_join, :delpage, :edit,:join,:new,:show]
+
   def index
     paramscheck
     @menu = params[:menu]
@@ -6,11 +8,10 @@ class PostController < ApplicationController
     @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, DateTime.now.end_of_day).reverse
 
   end
-
+  def update
+    
+  end
   def new
-    if logincheck
-      return
-    end
     # 참여중이라면 return 
     if current_user.info_id
       render(html: "<script> alert('이미 참여 중입니다.');history.back();</script>".html_safe, layout: 'application') and return
@@ -21,10 +22,6 @@ class PostController < ApplicationController
 
 
   def join
-    if logincheck
-      return
-    end
-
 
     post_data = Dbpost.find(params[:p_id])
     if post_data.fill_cnt <= post_data.now_cnt # 방에 모든사람이 채워졌을때
@@ -71,27 +68,26 @@ class PostController < ApplicationController
 
 
   def create
-    if logincheck
-      return
-    end
-
-
     # 
     t= Time.now.in_time_zone('Seoul')
     d = DateTime.new(t.year , t.month ,t.day, params[:hour].to_i ,params[:min].to_i ,0)
 
+    dp = Dbpost.new(postparams)
+    dp.user_id = current_user.id
+    dp.start_time =d
+    dp.save
 
-    dp = Dbpost.create(title: params[:dbpost][:title],
-                  content: params[:dbpost][:content],
-                  menu: params[:dbpost][:menu],
-                  school: params[:dbpost][:school],
-                  user_id: current_user.id,
-                  start_time: d,
-                 fill_cnt: params[:dbpost][:fill_cnt],
-                 select_style: params[:dbpost][:select_style],
-                  select_eat:params[:dbpost][:select_eat],
-                 hope_gender:params[:dbpost][:hope_gender]
-                )
+    # dp = Dbpost.create(title: params[:dbpost][:title],
+    #               content: params[:dbpost][:content],
+    #               menu: params[:dbpost][:menu],
+    #               school: params[:dbpost][:school],
+    #               user_id: current_user.id,
+    #               start_time: d,
+    #              fill_cnt: params[:dbpost][:fill_cnt],
+    #              select_style: params[:dbpost][:select_style],
+    #               select_eat:params[:dbpost][:select_eat],
+    #              hope_gender:params[:dbpost][:hope_gender]
+    #             )
     Info.create(dbpost_id: dp.id)
     current_user.info_id = Info.last.id
     current_user.save
@@ -99,22 +95,19 @@ class PostController < ApplicationController
     redirect_to "/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}"
   end
 
+  def edit
+    @postdata = Dbpost.find(params[:id])
+  end
+
 
   def show
-    if logincheck
-      return
-    end
     @postdata = Dbpost.find(params[:p_id])
-    
-
 
   end
   
   def delete_join
     postdata = Dbpost.find(params[:p_id])
-    if logincheck
-      return
-    end
+
     # 참여자가 아닌 경우 보낸다
     if postdata.info.id != current_user.info_id
       redirect_to '/' and return 
@@ -155,7 +148,10 @@ class PostController < ApplicationController
           location.href='/users/sign_in';      
           </script>".html_safe,
           layout: 'application'
-        ) and return true
+        ) and return
       end
+    end
+    def postparams
+      params.require(:dbpost).permit(:title, :content,:menu,:school,:fill_cnt,:select_style,:select_eat,:hope_gender)
     end
 end
