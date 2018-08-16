@@ -1,5 +1,4 @@
-<%=params%>
-<%=params[:choice]%>
+<h1><%=params[:choice]%></h1>
 <div style="padding-top: 10%;">
 	<div class="container">
 		<table class="table table-bordered table-hover text-center">
@@ -13,9 +12,12 @@
 			<tbody>
 				<%@notices.each do |x|%>
 				<tr>
-					<td><%=x.title%>'</td>
+					<td><a href="/notice/show/<%=x.id%>"><%=x.title%></td>
 					<td><%=User.find(x.user_id).name%></td>
-					<td><%=x.created_at%></td>
+					<td><%=x.created_at%> 
+						<a href="/notice/<%=x.id%>/edit">수정 </a>
+						<%= link_to '삭제', "/notice/delete/#{x.id}", data: {confirm: '삭제하시겠습니까?'}, method: :post %>
+						</td>
 				</tr>r
 				<%end%>
 			</tbody>

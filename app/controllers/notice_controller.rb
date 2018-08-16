@@ -33,17 +33,26 @@ before_action :authenticate_user!, except: [:index, :show]
   end
 
   def edit
-    if current_user.id == owner.id
     @notice = Notice.find params[:id]
-    end
+    @notice.choice = params[:choice]
   end
 
   def update
-    notice = Notice.find params[:notice_id]
-    notice.title = params[:notice_title]
+    @notice = Notice.find params[:id]
+    @notice.title = params[:title]
+    @notice.content = params[:content]
+    @notice.save
+
+    redirect_to "/notice/index?choice=#{@notice.choice}"
   end
 
+
   def delete
+    @notice = Notice.find params[:id]
+    temp = @notice.choice
+    @notice.destroy
+
+    redirect_to "/notice/index?choice=#{temp}"
   end
 
   def logincheck

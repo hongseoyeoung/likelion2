@@ -10,7 +10,7 @@
   <%=f.text_field :title %><br>
   <%=f.label '내용' %><br>
   <%=f.text_area :content %><br>
-  <input type='submit' value='작성' data-confirm= '작성하시겠습니까?'></input>
+  <%=f.submit "작성", data: {confirm: '작성하시겠습니까?'} %>
   <%= hidden_field_tag 'choice', params[:choice] %>
 <%end%>
 </div>

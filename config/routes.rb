@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   get 'notice/index'
   post 'notice/new'
   get 'notice/create'
-  get 'notice/edit'
-  get 'notice/delete'
+  get 'notice/:id/edit' => 'notice#edit'
+  post 'notice/delete/:id' => 'notice#delete'
+  get 'notice/show/:id' => 'notice#show'
+  get 'notice/:id/notices_update' => 'notice#update'
 
   # post
   get 'post/join'

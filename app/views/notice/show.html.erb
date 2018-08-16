@@ -1,0 +1,7 @@
+<h1><%= @notice.choice %></h1>
+<p><%= @notice.id %>번째 글</p>
+<h4>제목 : <%= @notice.title %></h4>
+<p>내용<br><%= @notice.content %></p>
+<a href='/notice/index?choice=<%=@temp%>'> 목록 </a>
+<%= link_to '삭제', "/notice/delete/#{@notice.id}", data: {confirm: '삭제하시겠습니까?'}, method: :post %>
+<a href='/notice/<%= @notice.id %>/edit'>수정</a>
