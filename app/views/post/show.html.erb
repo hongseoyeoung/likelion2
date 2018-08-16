@@ -1,5 +1,5 @@
 <%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
-    <h1><%=@postdata.school%> <%=@postdata.menu%></h1>
+    <h1><%=@postdata.school%> <%=@postdata.menu%>(뒤로가기)</h1>
 <%end%>
 
 
@@ -17,29 +17,121 @@
 
 <%end%>
 
+ <!-- Page Content -->
+    <div class="container">
 
+      <div class="row">
 
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
 
+          <!-- Title -->
+          <h1 class="mt-4">Post Title</h1>
 
+          <!-- Author -->
+          <p class="lead">
+            by
+            <a href="#">Start Bootstrap</a>
+          </p>
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>작성일: January 1, 2018 at 12:00 PM</p>
+
+          <hr>
+
+          <!-- Preview Image -->
+          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+
+          <hr>
+
+          <!-- Post Content -->
+          <p class="lead">글 내용</p>
+
+          <p>글 내용</p>
+
+          <p>글 내용</p>
+
+          <blockquote class="blockquote">
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer class="blockquote-footer">Someone famous in
+              <cite title="Source Title">Source Title</cite>
+            </footer>
+          </blockquote>
+
+          <hr>
+
+          <!-- Comments Form
+          <div class="container">
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+           -->
+        <%if current_user.info_id == @postdata.info.id%>
+
+         <div class="container">
+            <div class="card-body">
+                <div class="form-group">
+                <%=form_for(Comment.new, url: "/comment/create") do |f|%>
+                    <%=f.text_field :content, class: "form-control"%>
+                    <%=f.hidden_field :post_id, :value => @postdata.id%>
+                    <%=f.submit '제출', class: "submit"%>
+                <%end%>
+                </div>
+            
+            </div>
+          </div>
+          <%end%>
+          <!-- Single Comment -->
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">Commenter Name</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+
+          <!-- Comment with nested comments -->
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">닉네임</h5>
+              내용내용
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
 <br><br>
+
 <%# 방 접속자만 댓글을 볼 수 있다. %>
 <%if current_user.info_id == @postdata.info.id%>
 
     <%@postdata.comments.each do |c|%>
-        <%=c.user.name%> |
-        <%=c.content%> 
-        <%if current_user.id == c.user_id%>
-            <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
-        <%end%>
+            <%=c.user.name%> |
+            <%=c.content%> 
+            <%if current_user.id == c.user_id%>
+                <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
+            <%end%>
         <br>
-    <%end%>
-
-
-
-    <%=form_for(Comment.new, url: "/comment/create") do |f|%>
-        <%=f.text_field :content%>
-        <%=f.hidden_field :post_id, :value => @postdata.id%>
-        <%=f.submit '제출'%>
     <%end%>
 <%end%>
 
+<table>
+    <tr> 
+        <td></td>
+    </tr>
+
+</table>
