@@ -1,6 +1,6 @@
 <div class="container">
   <%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
-      <h1><%=@postdata.school%> <%=@postdata.menu%>(뒤로가기)</h1>
+      <h5><%=@postdata.school%> <%=@postdata.menu%>(뒤로가기)</h5>
   <%end%>
 </div>
 
@@ -15,55 +15,102 @@
         <!-- Post Content Column -->
         <div class="col-lg-8">
 
-          <!-- Title -->
-          <h1 class="mt-4"><%=@postdata.title%></h1>
+          <!-- 방제 -->
+          <h1 class="mt-4 title"><%=@postdata.title%>           
+            <a class="writer" href="#">by <%=@postdata.user.name%></a></h1>
 
-          <!-- Author -->
-          <p class="lead">
-            by
-            <a href="#"><%=@postdata.user.name%></a>
-          </p>
+          <!-- 작성자 -->
+
 
           <hr>
 
-          <!-- Date/Time -->
+          <!-- 작성일 -->
           <p>작성일 : <%=@postdata.created_at%></p>
 
-          <hr>
+          <hr class="line">
 
-          <!-- Preview Image -->
-          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
+          <!-- Preview Image 
+          <img class="" src="http://placehold.it/900x300" alt="">
           <hr>
+          -->
 
           <!-- Post Content -->
-          <p class="lead">글 내용</p>
-
-
-          <blockquote class="blockquote">
+          <div class="post-content">
+            <p class="lead">글 내용</p>
+            <blockquote class="blockquote">
             <p class="mb-0"><%=@postdata.content%></p>
             <br>
-            
-            <%if !current_user.info_id%>
-              <%# 참여가 가능한경우ㄴ %>
+
+             <%# 참여가 가능한경우ㄴ %>
+              <%if !current_user.info_id%>
+             
               <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
 
               <%# 작성자인경우 %>
               <%elsif @postdata.user_id == current_user.id%>
-                 <%=link_to '편집', post_edit_path(params[:p_id])%>
+                 <%=link_to '편집', post_edit_path(params[:p_id])%>&nbsp;&nbsp;
                   <%=link_to '삭제', post_delpage_path(p_id: params[:p_id]), method: :post%>
                   
                   
                   <%# 여기서는 글쓴사람이 글에 들어왔을때 %>
               <%elsif current_user.info_id == @postdata.info.id%>
                   <%=link_to '방 나가기', post_delete_join_path(p_id: params[:p_id]), method: :post ,:data => { :confirm => '나가시겠습니까?'} %>
-          <%end%>
-          </blockquote>
+              <%end%>
+            </blockquote>
+          </div>
           
 
           <hr>
 
-          <!-- Comments Form
+<%# 방 접속자만 댓글을 볼 수 있다. %>
+       <div class="comments">
+        <%if current_user.info_id == @postdata.info.id%>
+
+           <div class="container">
+             <div class="card-body">
+                <%=form_for(Comment.new, url: "/comment/create",  html: {class: "form-inline"}) do |f|%> 
+                
+                 <!-- 작성된 댓글 -->
+                    <%@postdata.comments.each do |c|%>
+                      <p>
+                        <img src="http://placehold.it/50x50" alt="">
+                         &nbsp;&nbsp;<%=c.user.name%> | &nbsp;<%=c.content%> &nbsp;&nbsp;
+                        <%if current_user.id == c.user_id%>
+                          <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
+                        <%end%>
+                      </p>     
+                    <%end%>
+
+                <!-- 댓글 입력 창 -->
+                <div class="write">
+                  <div class="form-group">
+                    <%=f.text_field :content, class: "form-control textbox"%>
+                  </div>
+                    <%=f.hidden_field :post_id, :value => @postdata.id%> 
+                  <div class="form-group"> 
+                    <%=f.submit '제출', class: "submit"%>
+                  </div>
+                </div>
+                <%end%>
+
+            </div>
+          </div>
+        <%end%>
+      </div>
+
+
+        </div>
+
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+<br><br>
+
+
+
+
+          <!-- 댓글
           <div class="container">
             <div class="card-body">
               <form>
@@ -75,54 +122,19 @@
             </div>
           </div>
            -->
-        <%if current_user.info_id == @postdata.info.id%>
 
-         <div class="container">
-            <div class="card-body">
-                <%=form_for(Comment.new, url: "/comment/create",  html: {class: "form-inline"}) do |f|%> 
-                  <div class="form-group">
-                    <%=f.text_field :content, class: "form-control"%>
-                  </div>
-                    <%=f.hidden_field :post_id, :value => @postdata.id%>
-                   <div class="form-group"> 
-                    <%=f.submit '제출', class: "submit"%>
-                    </div>
-                <%end%>
-
-            </div>
-          </div>
-          <%end%>
-          <%if current_user.info_id == @postdata.info.id%>
-            <%@postdata.comments.each do |c|%>
-               <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                 <%if current_user.id == c.user_id%>
-                        <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
-                  <%end%>
-                <div class="media-body">
-                <h5 class="mt-0"><%=c.user.name%></h5>
-                <%=c.content%> 
-                   
-                  </div>
-                </div>
-                <br>
-            <%end%>
-         <%end%>
-
-
-        </div>
-
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container -->
-<br><br>
-
-<%# 방 접속자만 댓글을 볼 수 있다. %>
-
-<table>
-    <tr> 
-        <td></td>
-    </tr>
-
-</table>
+           <!-- 작성된 댓글
+<div class="container">
+ <%if current_user.info_id == @postdata.info.id%>
+   <%@postdata.comments.each do |c|%>
+     <p>
+       <img src="http://placehold.it/50x50" alt="">
+       &nbsp;&nbsp;<%=c.user.name%> | &nbsp;<%=c.content%> &nbsp;&nbsp;
+       <%if current_user.id == c.user_id%>
+         <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
+       <%end%>
+     </p>     
+   <%end%>
+ <%end%>
+</div>
+-->
