@@ -8,21 +8,15 @@
 
           <%end%>
 
-
             <li><%=link_to '공지사항', href='/notice/index?choice=공지사항' %></li>
-            <% if user_signed_in?%>
-                <li><%=link_to '로그아웃', destroy_user_session_path, :data => {:confirm => '로그아웃하시겠습니까?'}, method: :delete %></li>
-                <li><%=link_to 'my page', '/post/mypage' %></li>
-                
-            <%else%>
-                <li><%=link_to '로그인', new_user_session_path%></li>
-
-            <%end%>
-            
+      
             <li><%=link_to '고객센터', href='/notice/index?choice=고객센터' %></li>
             
             <% if user_signed_in?%>
               <li><%=link_to '마이페이지', href='/mypage/index' %></li>
+              <li><%=link_to '로그아웃', destroy_user_session_path, :data => {:confirm => '로그아웃하시겠습니까?'}, method: :delete %></li>
+              <%else%>
+              <li><%=link_to '로그인', new_user_session_path%></li>
             <%end%>
         </ul>
       </nav>

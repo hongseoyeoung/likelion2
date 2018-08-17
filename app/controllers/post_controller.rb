@@ -5,7 +5,7 @@ class PostController < ApplicationController
     paramscheck
     @menu = params[:menu]
     @school = params[:school]
-    @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, DateTime.now.end_of_day).reverse
+    @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, (DateTime.now.end_of_day.change(day: DateTime.now.day+1))).reverse
 
   end
   def update
@@ -68,34 +68,36 @@ class PostController < ApplicationController
 
 
   def create
-    # 
-    t= Time.now.in_time_zone('Seoul')
     weight = 0
-    if params[:pm] == "true" || (params[:pm] == true )
+    flag = 0
+    if (params[:pm] == "true") && (params[:hour] != "12")
       weight = 12
     end
-    d = DateTime.new(t.year , t.month ,t.day, (params[:hour].to_i + weight), params[:min].to_i ,0)
+    @d = DateTime.now.change(hour: weight+ (params[:hour].to_i) ,min: params[:min].to_i)
+    if @d < DateTime.now
+      flag = 1
+      @d = DateTime.now.change(day: DateTime.now.day+1 ,hour: weight+ (params[:hour].to_i) ,min: params[:min].to_i)
+    end
     dp = Dbpost.new(postparams)
     dp.user_id = current_user.id
-    dp.start_time = d
+    dp.start_time = @d
     dp.save
 
-    # dp = Dbpost.create(title: params[:dbpost][:title],
-    #               content: params[:dbpost][:content],
-    #               menu: params[:dbpost][:menu],
-    #               school: params[:dbpost][:school],
-    #               user_id: current_user.id,
-    #               start_time: d,
-    #              fill_cnt: params[:dbpost][:fill_cnt],
-    #              select_style: params[:dbpost][:select_style],
-    #               select_eat:params[:dbpost][:select_eat],
-    #              hope_gender:params[:dbpost][:hope_gender]
-    #             )
+
     Info.create(dbpost_id: dp.id)
     current_user.info_id = Info.last.id
     current_user.save
 
-    redirect_to "/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}"
+    if flag == 1
+      render(
+        html: "<script>alert('내일 날짜로 등록됐습니다.');   location.href= '/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}';  </script>".html_safe,
+        layout: 'application'
+      ) and return
+    else
+        render(
+          html: "<script> location.href= '/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}'; </script>".html_safe, layout: 'application'
+        ) and return
+    end
   end
 
   def edit
@@ -133,6 +135,8 @@ class PostController < ApplicationController
 
     def menu_list
       @arr = ['치킨','피자','중식','족발','패스트푸드','분식']
+      @hour_list =['0','1','2','3','4','5','6','7','8','9','10','11']
+      @min_list = ['0','10','20','30','40','50']
     end
 
     def paramscheck
@@ -143,8 +147,7 @@ class PostController < ApplicationController
           location.href='/';      
           </script>".html_safe,
           layout: 'application'
-        )
-        return
+        ) and return
       end
     end
 

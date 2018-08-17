@@ -65,9 +65,10 @@
         <div class="form-group">
             <%= f.label :희망시간 %>
             <br>
-             <%= f.label :오후 %> &nbsp; <input type="checkbox" name="pm" value="true">    &nbsp; &nbsp;
-             <%=number_field_tag 'hour', nil, within: 1...13, required: "required"%>
-             <%=number_field_tag 'min', nil, within: 0...60, required: "required"%>
+             <%= f.label :오후 %> &nbsp; <input type="checkbox" name="pm" value="true" onclick="change_hour(this)">    &nbsp; &nbsp;
+           
+             <%=select_tag 'hour', options_for_select(@hour_list.collect{ |u| [u] })%>
+             <%=select_tag 'min', options_for_select(@min_list.collect{ |u| [u] })%>
         </div>
         
         <div class="form-group">
@@ -89,10 +90,36 @@
 
 <script>
 
-    function button_clicked(data)
+    function change_hour(data)
     {
-        document.getElementById(data).className = "btn btn-primary active";
+        
+        var am = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var pm = [12,1,2,3,4,5,6,7,8,9,10,11];
+        var objSel = document.getElementById("hour");
+        for(i=objSel.length; i>=0; i--){
+            objSel.options[i]=null;
+        }
+        if(data.checked) // 체크되어있을 때 오후시간을 불러들여야함.
+        {
+            for(var i = 0 ; i<pm.length; i++)
+            {
+                var objOption = document.createElement("option");        
+                objOption.text = pm[i];
+                objOption.value = pm[i];
+                objSel.options.add(objOption);
+            }
+        }
+        else{ // 오전시간을 불러들여야함.
+            for(var i = 0 ; i<am.length; i++)
+            {
+            var objOption = document.createElement("option");        
+            objOption.text = am[i];
+            objOption.value = am[i];
+            objSel.options.add(objOption);
+            }
+        }
     }
+
     function select_eat_call(data) 
     {
         /* 배달음식과 매장투어를 선택시 배달옵션을 활성화할지 비활성화할지 선택해주는 함수. */
