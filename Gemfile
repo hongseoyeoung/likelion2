@@ -8,6 +8,13 @@ gem 'devise-bootstrap-views'
 gem "bootstrap_form", ">= 4.0.0.alpha1"
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'devise'
+
+
+# rails_db 
+gem "rails_db", "1.6"
+gem 'kaminari', '< 1.0.0'
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.7'
 # Use sqlite3 as the database for Active Record

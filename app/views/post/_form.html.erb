@@ -11,7 +11,7 @@
     <%end%>
     <br><br><br>
     <h1 style="text-align:center;">글쓰기</h1>
-    <%=form_for(dbpost, url: url)  do |f|%>
+    <%=form_for(dbpost, url: url, school: school, menu: menu)  do |f|%>
         <div class="form-group">
             <%= f.label :title %> <br>
             <%= f.text_field :title, class: "form-control", required: "required"%>
@@ -22,7 +22,7 @@
         <div class="form-group">
             <%= f.label :타입 %><br>
                 <%= f.label :배달음식 %>
-                        <%= f.radio_button :select_style, '배달', :checked => false, :onClick => "select_eat_call(this)"%> 
+                        <%= f.radio_button :select_style, '배달', :checked => false, :onClick => "select_eat_call(this)" , required: "required"%> 
                 <%= f.label :매장투어 %>
                     <%= f.radio_button :select_style, '투어', :checked => false, :onClick => "select_eat_call(this)"%> 
         </div>
@@ -30,7 +30,7 @@
         <div class="form-group">
             <%= f.label :배달옵션 %><br>
                 <%= f.label :함께식사 %>
-                        <%= f.radio_button :select_eat, '함께', :checked => false, :onClick => "call_packing(this)"%> 
+                        <%= f.radio_button :select_eat, '함께', :checked => false, :onClick => "call_packing(this)" , required: "required"%> 
                 <%= f.label :개별포장 %>
                     <%= f.radio_button :select_eat, '포장', :checked => false, :onClick => "call_packing(this)" %> 
         </div>
@@ -38,24 +38,20 @@
         <div class="form-group">
             <%= f.label :희망성별 %><br>
                 <%= f.label :동성 %>
-                        <%= f.radio_button :hope_gender, '동성', :checked => false %> 
+                        <%= f.radio_button :hope_gender, '동성', :checked => false , required: "required"%> 
                 <%= f.label :무관 %>
-                    <%= f.radio_button :hope_gender, '무관', :checked => true%>            
+                    <%= f.radio_button :hope_gender, '무관', :checked => false%>            
         </div> <br>
-
-
-        <div class="form-group">
-            <%= f.label :menu %>
-            <%= f.text_field :mm, :value => params[:menu], class: "form-control", disabled: true%>
-            <%= f.hidden_field :menu, :value => params[:menu]%>
-        </div>
-
-
 
         <div class="form-group">
             <%= f.label :school %>
-            <%= f.text_field :ss, :value => params[:school],class: "form-control", disabled: true%>
-            <%= f.hidden_field :school, :value => params[:school]%>
+            <%= f.text_field :ss, :value => school ,class: "form-control", disabled: true%>
+            <%= f.hidden_field :school, :value => school %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :menu %><br>
+            <%= f.select(:menu, @arr, {:selected => menu}, {:class => "form-control"})%>
         </div>
 
 
@@ -69,7 +65,7 @@
         <div class="form-group">
             <%= f.label :희망시간 %>
             <br>
-
+             <%= f.label :오후 %> &nbsp; <input type="checkbox" name="pm" value="true">    &nbsp; &nbsp;
              <%=number_field_tag 'hour', nil, within: 1...13, required: "required"%>
              <%=number_field_tag 'min', nil, within: 0...60, required: "required"%>
         </div>

@@ -1,6 +1,6 @@
 class PostController < ApplicationController 
   before_action :logincheck, only: [:create, :delete_join, :delpage, :edit,:join,:new,:show]
-
+  before_action :menu_list, only: [:new, :edit]
   def index
     paramscheck
     @menu = params[:menu]
@@ -70,11 +70,14 @@ class PostController < ApplicationController
   def create
     # 
     t= Time.now.in_time_zone('Seoul')
-    d = DateTime.new(t.year , t.month ,t.day, params[:hour].to_i ,params[:min].to_i ,0)
-
+    weight = 0
+    if params[:pm] == "true" || (params[:pm] == true )
+      weight = 12
+    end
+    d = DateTime.new(t.year , t.month ,t.day, (params[:hour].to_i + weight), params[:min].to_i ,0)
     dp = Dbpost.new(postparams)
     dp.user_id = current_user.id
-    dp.start_time =d
+    dp.start_time = d
     dp.save
 
     # dp = Dbpost.create(title: params[:dbpost][:title],
@@ -127,6 +130,11 @@ class PostController < ApplicationController
 
 
   private
+
+    def menu_list
+      @arr = ['치킨','피자','중식','족발','패스트푸드','분식']
+    end
+
     def paramscheck
       if !(params[:school] && params[:menu])
         render(
