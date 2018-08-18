@@ -8,9 +8,7 @@ class PostController < ApplicationController
     @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, (DateTime.now.end_of_day.change(day: DateTime.now.day+1))).reverse
 
   end
-  def update
-    
-  end
+ 
   def new
     # 참여중이라면 return 
     if current_user.info_id
@@ -22,7 +20,6 @@ class PostController < ApplicationController
 
 
   def join
-
     post_data = Dbpost.find(params[:p_id])
     if post_data.fill_cnt <= post_data.now_cnt # 방에 모든사람이 채워졌을때
       render(html: "<script> alert('정원이 찼습니다.');location.href='/post/index?school=#{post_data.school}&menu=#{post_data.menu}'; </script>".html_safe, layout: 'application') and return
@@ -66,38 +63,36 @@ class PostController < ApplicationController
 
 
 
+  def update
+    post = Dbpost.find(params[:p_id])
+    @d = get_times
+    post.start_time = @d
+    post.title = params[:dbpost][:title]
+    post.content = params[:dbpost][:content]
+    post.menu = params[:dbpost][:menu]
+    post.school = params[:dbpost][:school]
+    post.fill_cnt = params[:dbpost][:fill_cnt]
+    post.select_style = params[:dbpost][:select_style]
+    post.select_eat = params[:dbpost][:select_eat]
+    post.hope_gender = params[:dbpost][:hope_gender]
+    post.save
 
+    page_redirect and return
+  end
   def create
-    weight = 0
-    flag = 0
-    if (params[:pm] == "true") && (params[:hour] != "12")
-      weight = 12
-    end
-    @d = DateTime.now.change(hour: weight+ (params[:hour].to_i) ,min: params[:min].to_i)
-    if @d < DateTime.now
-      flag = 1
-      @d = DateTime.now.change(day: DateTime.now.day+1 ,hour: weight+ (params[:hour].to_i) ,min: params[:min].to_i)
-    end
+    @d = get_times
+
     dp = Dbpost.new(postparams)
     dp.user_id = current_user.id
     dp.start_time = @d
     dp.save
 
-
+    # 관계 형성
     Info.create(dbpost_id: dp.id)
     current_user.info_id = Info.last.id
     current_user.save
 
-    if flag == 1
-      render(
-        html: "<script>alert('내일 날짜로 등록됐습니다.');   location.href= '/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}';  </script>".html_safe,
-        layout: 'application'
-      ) and return
-    else
-        render(
-          html: "<script> location.href= '/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}'; </script>".html_safe, layout: 'application'
-        ) and return
-    end
+    page_redirect and return
   end
 
   def edit
@@ -132,6 +127,34 @@ class PostController < ApplicationController
 
 
   private
+    def get_times
+      @flag = 0
+      weight = 0
+      if (params[:pm] == "true") && (params[:hour] != "12")
+        weight = 12
+      end
+      @d = DateTime.now.change(hour: weight+ (params[:hour].to_i) ,min: params[:min].to_i)
+      if @d < DateTime.now
+        @flag = 1
+        @d = DateTime.now.change(day: DateTime.now.day+1 ,hour: weight+ (params[:hour].to_i) ,min: params[:min].to_i)
+      end
+      return @d
+    end
+
+    def page_redirect
+      if @flag == 1
+        render(
+          html: "<script>alert('내일 날짜로 등록됐습니다.');   location.href= '/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}';  </script>".html_safe,
+          layout: 'application'
+        ) and return
+      else
+          render(
+            html: "<script> location.href= '/post/index?school=#{params[:dbpost][:school]}&menu=#{params[:dbpost][:menu]}'; </script>".html_safe, layout: 'application'
+          ) and return
+      end
+    end
+
+
 
     def menu_list
       @arr = ['치킨','피자','중식','족발','패스트푸드','분식']

@@ -11,7 +11,7 @@
     <%end%>
     <br><br><br>
     <h1 style="text-align:center;">글쓰기</h1>
-    <%=form_for(dbpost, url: url, school: school, menu: menu)  do |f|%>
+    <%=form_for(dbpost, url: url, school: school, menu: menu, method: :post) do |f|%>
         <div class="form-group">
             <%= f.label :title %> <br>
             <%= f.text_field :title, class: "form-control", required: "required"%>
@@ -76,6 +76,7 @@
             <%= f.text_area :content, class: "form-control", placeholder: "만날위치, 세부메뉴 등을 작성해주세요!", required: "required"%>
         </div>
 
+        <%= hidden_field_tag 'p_id',  params[:id] %>
 
 
         <div class="form-group" style="text-align:center;">

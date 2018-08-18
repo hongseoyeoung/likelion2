@@ -10,6 +10,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'devise'
 
 
+gem 'whenever', require: false
 # rails_db 
 gem "rails_db", "1.6"
 gem 'kaminari', '< 1.0.0'
