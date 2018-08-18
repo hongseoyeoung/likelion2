@@ -8,9 +8,9 @@
 # set :output, "/path/to/my/cron_log.log"
 #
 env :PATH, ENV['PATH']
-set :output, "/vagrant/real/log/cron_log.log"
-every 1.minutes do
-    rake "post:post_user_del"#, :environment => 'development'
+set :output, "/vagrant/hong/log/cron_log.log"
+every 3.minutes do
+    rake "post:post_user_del", :environment => 'development'
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
 #   rake "some:great:rake:task"

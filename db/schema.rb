@@ -76,9 +76,8 @@ ActiveRecord::Schema.define(version: 20180818114441) do
     t.string   "title"
     t.integer  "user_id"
     t.string   "content"
-    t.boolean  "notice",     default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "choice"
     t.index ["user_id"], name: "index_notices_on_user_id"
   end
@@ -99,7 +98,9 @@ ActiveRecord::Schema.define(version: 20180818114441) do
     t.datetime "updated_at",                          null: false
     t.string   "gender"
     t.integer  "info_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["info_id"], name: "index_users_on_info_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
