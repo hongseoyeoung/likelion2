@@ -1,8 +1,29 @@
 # frozen_string_literal: true
 
 class DeviseCreateUsers < ActiveRecord::Migration[5.0]
+  def self.up
+    create_table(:users) do |t|
+      t.database_authenticatable :null => false
+      # t.confirmable
+      t.Recoverable
+      t.Rememberable
+      t.Trackable
+      t.timestamps
+    end
+    add_index :users, :email,                 :unique => true
+    add_index :users, :reset_password_token,  :unique => true
+    validates :email, presence: true, uniqueness: true, if: -> { self.email.present? }
+    
+
+  end
+
+  def self.down
+    drop_table :users
+  end
+
   def change
     create_table :users do |t|
+      
       ## Database authenticatable
       t.string :name
       t.string :email,              null: false, default: ""
@@ -37,9 +58,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
-    add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end
+
 end

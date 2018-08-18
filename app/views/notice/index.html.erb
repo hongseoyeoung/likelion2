@@ -6,7 +6,8 @@
 				<tr>
 					<th style="text-align: center;"><font color="white">제목</font></th>
 					<th style="text-align: center;"><font color="white">작성자</font></th>
-					<th style="text-align: center;"><font color="white">작성일</font></th>
+					<th style="text-align: center;"><font color="white">작성일</font></th>			
+					<th style="text-align: center;"><font color="white">조회</font></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -17,22 +18,18 @@
 					<td><%=x.created_at%> 
 						<a href="/notice/<%=x.id%>/edit">수정 </a>
 						<%= link_to '삭제', "/notice/delete/#{x.id}", data: {confirm: '삭제하시겠습니까?'}, method: :post %>
-						</td>
-				</tr>r
-				<%end%>
+					</td>
+					<td><%= "#{x.unique_impression_count} views" %></td>
+<!-- 						조회수
+ -->					
+				</tr>
+				
 			</tbody>
+			<%end%>
+				<%= paginate @notices %>
 		</table>
 
 		<a href="/notice/create?choice=<%=@temp%>" class="btn btn-default pull-right">글쓰기</a>
 
-		<div class="text-center">
-			<ul class="pagination">
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-			</ul>
-		</div>
 	</div>
 </div>

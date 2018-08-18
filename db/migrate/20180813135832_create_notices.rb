@@ -4,7 +4,7 @@ class CreateNotices < ActiveRecord::Migration[5.0]
       t.string :title
       t.references :user, foreign_key: true
       t.string :content
-
+      t.boolean :notice, default: false
       t.timestamps
     end
   end

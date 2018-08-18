@@ -1,0 +1,4 @@
+<% if current_user.has_role? :admin %>
+	<font color="red">어드민 전용 : 해당 게시글 공지사항 설정 </font><br/>
+	<%= f.check_box :notice, id: :post_notice %>
+<% end %>

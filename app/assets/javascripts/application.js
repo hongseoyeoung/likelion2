@@ -13,4 +13,5 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree ./common
-
+//= require tinymce
+//= require tinymce-jquery

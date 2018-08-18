@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :dbposts
   has_many :infos
   has_many :comments
+  validates_presence_of :email
+  validates_uniqueness_of :email
 end
