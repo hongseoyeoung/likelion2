@@ -1,11 +1,11 @@
 class NoticeController < ApplicationController
 before_action :authenticate_user!, except: [:index, :show]
-
+before_action :log_impression, :only=> [:show]
   
   def index
     @temp = params[:choice]
     @notices = Notice.where("choice = ?", @temp).all.reverse
-
+    @notices = Notice.order("created_at DESC").page params[:page]
 
   end
 
@@ -66,4 +66,18 @@ before_action :authenticate_user!, except: [:index, :show]
         ) and return true
       end
     end
+
+  def log_impression
+    @hit_notice = Notice.find(params[:id])
+    @hit_notice.impressions.create(ip_address: request.remote_ip,user_id:current_user.id)
+  end
+
+  def notice_params
+    params[:notice][:user_id] = current_user.id
+    params.require(:notice).permit(:title, :content, :user_id, :notice)
+  end
+
+  def list
+    @allnotice = Notice.all
+  end
 end

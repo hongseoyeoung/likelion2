@@ -1,15 +1,14 @@
-<h2>비밀번호를 잊으셨습니까?</h2>
+<h2>Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
 
-  <div class="field">
-    <%= f.label :이메일 %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
   </div>
 
-  <div class="actions">
-  	<button href='passwords/edit'>비밀번호 변경</button>
+  <div class="form-actions">
+    <%= f.button :submit, "Send me reset password instructions" %>
   </div>
 <% end %>
 

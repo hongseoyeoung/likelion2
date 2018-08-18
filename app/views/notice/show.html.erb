@@ -5,3 +5,4 @@
 <a href='/notice/index?choice=<%=@temp%>'> 목록 </a>
 <%= link_to '삭제', "/notice/delete/#{@notice.id}", data: {confirm: '삭제하시겠습니까?'}, method: :post %>
 <a href='/notice/<%= @notice.id %>/edit'>수정</a>
+
