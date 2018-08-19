@@ -1,4 +1,20 @@
 <% if current_user.has_role? :admin %>
+<%= form_for(@notice, html: {multipart: true}) do |x|>
 	<font color="red">어드민 전용 : 해당 게시글 공지사항 설정 </font><br/>
 	<%= f.check_box :notice, id: :post_notice %>
+	<div class="field">
+		<%= f.label :제목 %>
+		<%= f.text_field :title %>
+	</div>
+	<div class="field">
+		<%= f.label :image %><br>
+		<%= f.file_field :image %>
+	</div>
+
+	<div class="field">
+		<%= f.label :내용 %><br>
+		<%= tinymce :language => "ko" %>
+		<%= f.text_area :content %>
+	</div>
+	
 <% end %>
