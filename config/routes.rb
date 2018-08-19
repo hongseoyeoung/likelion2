@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'sendmail/index'
+
   get 'mypage/index'
 
   get 'mypage/edit'
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
   
   root 'home#index'
 
-  
+  get 'sendmail/index'
   # notice
   get 'notice/index'
   post 'notice/new'

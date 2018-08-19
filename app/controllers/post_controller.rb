@@ -1,12 +1,12 @@
 class PostController < ApplicationController 
   before_action :logincheck, only: [:create, :delete_join, :delpage, :edit,:join,:new,:show]
   before_action :menu_list, only: [:new, :edit]
+
   def index
     paramscheck
     @menu = params[:menu]
     @school = params[:school]
     @posts = Dbpost.where("menu = ? AND school = ? AND start_time BETWEEN ? AND ?",@menu,@school, DateTime.now.beginning_of_day, (DateTime.now.end_of_day.change(day: DateTime.now.day+1))).reverse
-
   end
  
   def new
@@ -42,7 +42,11 @@ class PostController < ApplicationController
 
 
   def delpage
+    # 만든사람만 삭제할 수 있어야함.
     data = Dbpost.find(params[:p_id])
+    if !writer_check(data)
+      redirect_to '/' and return
+    end
     school = data.school
     menu = data.menu
 
@@ -65,6 +69,11 @@ class PostController < ApplicationController
 
   def update
     post = Dbpost.find(params[:p_id])
+    if !writer_check(post)
+      redirect_to '/' and return
+    end
+
+
     @d = get_times
     post.start_time = @d
     post.title = params[:dbpost][:title]
@@ -79,6 +88,9 @@ class PostController < ApplicationController
 
     page_redirect and return
   end
+
+
+
   def create
     @d = get_times
 
@@ -97,6 +109,9 @@ class PostController < ApplicationController
 
   def edit
     @postdata = Dbpost.find(params[:id])
+    if !writer_check(@postdata)
+      redirect_to '/' and return
+    end
   end
 
 
@@ -109,10 +124,17 @@ class PostController < ApplicationController
     postdata = Dbpost.find(params[:p_id])
 
     # 참여자가 아닌 경우 보낸다
-    if postdata.info.id != current_user.info_id
-      redirect_to '/' and return 
+    flag = 0
+    postdata.info.users.each do |u|
+      if u.id == current_user.id
+        flag = 1
+      end
     end
-    
+
+
+    if flag == 0
+      redirect_to '/' and return
+    end
 
     # 접속된 유저의 info_id 삭제
     current_user.info_id = nil
@@ -127,6 +149,14 @@ class PostController < ApplicationController
 
 
   private
+    def writer_check(postdata)
+      if postdata.user_id != current_user.id
+        return false
+      end
+      return true
+    end
+
+
     def get_times
       @flag = 0
       weight = 0
@@ -185,6 +215,7 @@ class PostController < ApplicationController
         ) and return
       end
     end
+
     def postparams
       params.require(:dbpost).permit(:title, :content,:menu,:school,:fill_cnt,:select_style,:select_eat,:hope_gender)
     end
