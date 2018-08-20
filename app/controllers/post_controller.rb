@@ -28,6 +28,12 @@ class PostController < ApplicationController
       render(html: "<script> alert('이미 참여 중입니다.');location.href='/post/index?school=#{post_data.school}&menu=#{post_data.menu}'; </script>".html_safe, layout: 'application') and return
     end
 
+    if post_data.hope_gender == '동성'
+      if current_user.gender != post_data.user.gender
+        render(html: "<script> alert('성별이 다릅니다.');location.href='/post/index?school=#{post_data.school}&menu=#{post_data.menu}'; </script>".html_safe, layout: 'application') and return
+      end
+    end
+
     # 게시글을 불러오고 참여인원수 증가 + 현재 참여인원 ID를 Info DB에 추가함.
 
     post_data.now_cnt = post_data.now_cnt+1
