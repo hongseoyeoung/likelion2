@@ -1,46 +1,47 @@
-<h2>회원가입</h2>
+<div class="container">
+  <h2 style="padding-top: 50px">회원가입</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-  
-  <div class="form-group">
-   <%= f.label :이름 %>
-   <%= f.text_field :name, autofocus: true %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+    
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name,class: "form-control", autofocus: true %>
+    </div>
 
-
-  <div class="btn-group" data-toggle="buttons">
-    <%= f.label :성별 %><br>
-      <%= f.label :남자 %>
-        <%= f.radio_button :gender, '남자', :checked => true %> 
-      <%= f.label :여자 %>
-       <%= f.radio_button :gender, '여자', :checked => true%> 
-  </div>
-
-
-  <div class="field">
-    <%= f.label :이메일 %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    <%= f.submit "중복확인" %>
-  </div>
+    
+    <div class="btn-group" data-toggle="buttons">
+      <%= f.label :성별 %><br>
+        <%= f.label :남자 %>
+          <%= f.radio_button :gender, '남자', :checked => true %> 
+        <%= f.label :여자 %>
+        <%= f.radio_button :gender, '여자', :checked => true%> 
+    </div>
 
 
-  <div class="field">
-    <%= f.label :비밀번호 %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>자 이상 입력해주세요)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="field">
+      <%= f.label :이메일 %><br />
+      <%= f.email_field :email,class: "form-control", autofocus: true, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :비밀번호_확인 %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "가입하기" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :비밀번호 %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %>자 이상 입력해주세요)</em>
+      <% end %><br />
+      <%= f.password_field :password,class: "form-control", autocomplete: "off" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="field">
+      <%= f.label :비밀번호_확인 %><br />
+      <%= f.password_field :password_confirmation, class: "form-control",autocomplete: "off" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "가입하기", class: "btn btn-default" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

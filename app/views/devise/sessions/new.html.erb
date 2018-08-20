@@ -1,26 +1,29 @@
-<h2>로그인</h2>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :이메일 %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <h2 style="padding-top:50px">로그인</h2>
 
-  <div class="field">
-    <%= f.label :비밀번호 %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :이_아이디를_기억합니다 %>
+      <%= f.label :이메일 %><br />
+      <%= f.email_field :email, autofocus: true,class: "form-control" ,autocomplete: "email" %>
     </div>
-  <% end -%>
 
-  <div class="actions">
-    <%= f.submit "로그인" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :비밀번호 %><br />
+      <%= f.password_field :password,class: "form-control", autocomplete: "off" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :이_아이디를_기억합니다 %>
+      </div>
+    <% end -%>
+
+    <div class="actions">
+      <%= f.submit "로그인" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>
