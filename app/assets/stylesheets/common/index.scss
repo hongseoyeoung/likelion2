@@ -5,6 +5,41 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+/* 폰트 정의 */
+@font-face{
+  font-family: 'NanumGothic';
+  scr: url(font/NanumGothicLight.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face{
+  font-family: '나눔바른고딕';
+  scr: url(font/NanumBarunGothic.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face{
+  font-family: '배민주아';
+  scr: url(font/BMJUA.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face{
+  font-family: '이순신체';
+  scr: url(font/이순신regular.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face{
+  font-family: '이순신체';
+  scr: url(font/이순신bold.ttf) format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+/* _normalize.scss */
 /* line 9, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
 html {
   font-family: sans-serif;
@@ -74,7 +109,7 @@ abbr[title] {
 /* line 118, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
 b,
 strong {
-  font-weight: bold;
+  font-family: 배민주아;
 }
 
 /* line 127, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
@@ -262,6 +297,7 @@ th {
   padding: 0;
 }
 
+/* _print.scss */
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
   /* line 9, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_print.scss */
@@ -370,6 +406,8 @@ th {
   src: url("/assets/bootstrap/glyphicons-halflings-regular-13634da87d9e23f8c3ed9108ce1724d183a39ad072e73e1b3d8cbf646d2d0407.eot");
   src: url("/assets/bootstrap/glyphicons-halflings-regular-13634da87d9e23f8c3ed9108ce1724d183a39ad072e73e1b3d8cbf646d2d0407.eot?#iefix") format("embedded-opentype"), url("/assets/bootstrap/glyphicons-halflings-regular-fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c.woff2") format("woff2"), url("/assets/bootstrap/glyphicons-halflings-regular-a26394f7ede100ca118eff2eda08596275a9839b959c226e15439557a5a80742.woff") format("woff"), url("/assets/bootstrap/glyphicons-halflings-regular-e395044093757d82afcb138957d06a1ea9361bdcf0b442d06a18a8051af57456.ttf") format("truetype"), url("/assets/bootstrap/glyphicons-halflings-regular-42f60659d265c1a3c30f9fa42abcbb56bd4a53af4d83d316d6dd7a36903c43e5.svg#glyphicons_halflingsregular") format("svg");
 }
+
+/* _glyphicons.scss */
 /* line 24, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_glyphicons.scss */
 .glyphicon {
   position: relative;
@@ -1694,6 +1732,8 @@ th {
   content: "\e260";
 }
 
+
+/* _scaffolding.scss */
 /* line 11, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_scaffolding.scss */
 * {
   -webkit-box-sizing: border-box;
@@ -1827,6 +1867,8 @@ hr {
   cursor: pointer;
 }
 
+
+/* _type.scss */
 /* line 9, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_type.scss */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -2002,6 +2044,7 @@ mark,
   color: #777777;
 }
 
+/* _text-emphasis.scss */
 /* line 5, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 .text-primary {
   color: #337ab7;
@@ -2062,6 +2105,8 @@ a.text-danger:focus {
   color: #fff;
 }
 
+
+/* _background-variant.scss */
 /* line 5, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 .bg-primary {
   background-color: #337ab7;
@@ -2117,6 +2162,8 @@ a.bg-danger:focus {
   background-color: #e4b9b9;
 }
 
+
+/* _type.scss */
 /* line 138, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_type.scss */
 .page-header {
   padding-bottom: 9px;
@@ -2281,6 +2328,8 @@ address {
   line-height: 1.428571429;
 }
 
+
+/* _code.scss  */
 /* line 7, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_code.scss */
 code,
 kbd,
@@ -2345,6 +2394,8 @@ pre code {
   overflow-y: scroll;
 }
 
+
+/* _grid.scss */
 /* line 10, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_grid.scss */
 .container {
   margin-right: auto;
@@ -2352,6 +2403,9 @@ pre code {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+
+/* _clearfix.scss */
 /* line 14, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
 .container:before, .container:after {
   content: " ";
@@ -2361,6 +2415,8 @@ pre code {
 .container:after {
   clear: both;
 }
+
+/* _grid.scss */
 @media (min-width: 768px) {
   /* line 10, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_grid.scss */
   .container {
@@ -2387,6 +2443,8 @@ pre code {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+/* _clearfix.scss */
 /* line 14, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
 .container-fluid:before, .container-fluid:after {
   content: " ";
@@ -2412,6 +2470,8 @@ pre code {
   clear: both;
 }
 
+
+/* _grid-framework.scss */
 /* line 11, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_grid-framework.scss */
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
@@ -3818,6 +3878,7 @@ output {
   width: 100%;
   height: 34px;
   padding: 6px 12px;
+  font-family: 배민주아;
   font-size: 14px;
   line-height: 1.428571429;
   color: #555555;
@@ -6147,11 +6208,13 @@ tbody.collapse.in {
 }
 /* line 549, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > li > a {
+  font-family: 배민주아;
+  font-size: 16px;
   color: #F2E9DF;
 }
 /* line 552, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-  color: #fff;
+  color: #F2E9D;
   background-color: transparent;
 }
 /* line 559, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_navbar.scss */
@@ -8806,6 +8869,7 @@ button.close {
   margin-top: 10px;
 }
 
+/* 카드 */
 /* line 2, /vagrant/source/app/assets/stylesheets/common/card.scss */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -8875,6 +8939,8 @@ button.close {
   line-height: 20px;
 }
 
+
+/* 로고 */
 /* line 2, /vagrant/source/app/assets/stylesheets/common/logo.scss */
 #logo {
   float: left;
@@ -8884,7 +8950,9 @@ button.close {
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
+  font-style: 배민주아;
   font-weight: bold;
+
 }
 /* line 11, /vagrant/source/app/assets/stylesheets/common/logo.scss */
 #logo:hover {

@@ -94,7 +94,9 @@ ActiveRecord::Schema.define(version: 20180818114441) do
     t.datetime "updated_at",                          null: false
     t.string   "gender"
     t.integer  "info_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["info_id"], name: "index_users_on_info_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
