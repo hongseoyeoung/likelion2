@@ -8,35 +8,18 @@
 
 /* 폰트 정의 */
 @font-face{
-  font-family: 'NanumGothic';
-  scr: url(font/NanumGothicLight.ttf) format('truetype');
+  font-family: 'NanumSquareRound';
+  scr: url(font/NanumSquareRoundR.ttf) format('truetype');
   font-style: normal;
 }
 
 @font-face{
-  font-family: '나눔바른고딕';
-  scr: url(font/NanumBarunGothic.ttf) format('truetype');
+  font-family: 'NanumSquareRound';
+  scr: url(font/NanumSquareRoundB.ttf) format('truetype');
   font-style: normal;
-}
-
-@font-face{
-  font-family: '배민주아';
-  scr: url(font/BMJUA.ttf) format('truetype');
-  font-style: normal;
-}
-
-@font-face{
-  font-family: '이순신체';
-  scr: url(font/이순신regular.ttf) format('truetype');
-  font-style: normal;
-}
-
-@font-face{
-  font-family: '이순신체';
-  scr: url(font/이순신bold.ttf) format('truetype');
   font-weight: bold;
-  font-style: normal;
 }
+
 
 
 /* _normalize.scss */
@@ -109,7 +92,7 @@ abbr[title] {
 /* line 118, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
 b,
 strong {
-  font-family: 배민주아;
+  font-family: NanumSquareRound;
 }
 
 /* line 127, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
@@ -3878,7 +3861,7 @@ output {
   width: 100%;
   height: 34px;
   padding: 6px 12px;
-  font-family: 배민주아;
+  font-family: NanumSquareRound;
   font-size: 14px;
   line-height: 1.428571429;
   color: #555555;
@@ -6208,7 +6191,8 @@ tbody.collapse.in {
 }
 /* line 549, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > li > a {
-  font-family: 배민주아;
+  font-family: NanumSquareRound;
+  font-weight: bold;
   font-size: 16px;
   color: #F2E9DF;
 }
@@ -8950,7 +8934,7 @@ button.close {
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
-  font-style: 배민주아;
+  font-style: NanumSquareRound;
   font-weight: bold;
 
 }
