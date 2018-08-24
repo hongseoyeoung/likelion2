@@ -1,94 +1,79 @@
 <%=render 'layouts/header' %>
 
-<div class="container">
-  <%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
-      <h5><%=@postdata.school%> <%=@postdata.menu%>(뒤로가기)</h5>
-  <%end%>
-</div>
-
-
-
-
  <!-- Page Content -->
-    <div class="container">
+<div class="container">
+  <div class="row">
+    <!-- Post Content Column -->
+    <div class="col-lg-8" style="border: 2px #e88f2e solid; border-radius: 10px;">
+      <!-- 방제 -->
+      <h1 class="mt-4 title"><%=@postdata.title%>           
+        <a class="writer" href="#">by <%=@postdata.user.name%></a>
+      </h1>
 
-      <div class="row">
+      <hr>
+      <!-- 작성일 -->
+      <p style="color: #666">작성일 : <%=@postdata.created_at%></p>
 
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
+      <hr class="line">
+     
+      <p class="card-body-hashtag">#<%=@postdata.select_style%> #<%=@postdata.select_eat%> 
+        <%if @postdata.hope_gender == "동성"%>
+          #<%=User.find(@postdata.user_id).gender%>           
+        <%else%>
+          #<%=@postdata.hope_gender%>
+        <%end%>
+      </p>
+      <p class = "card-body-nickname">시작시간: <%=@postdata.start_time.strftime("%_m/%-d %p %l:%M")%></p>
+     
+      <hr class="line">
+      <!-- Post Content -->
+      <div class="post-content">
+        <blockquote class="blockquote">
+          <p class="mb-0" style="font-size: 20px"><%=@postdata.content%></p>
+          <br>
 
-          <!-- 방제 -->
-          <h1 class="mt-4 title"><%=@postdata.title%>           
-            <a class="writer" href="#">by <%=@postdata.user.name%></a></h1>
+           <%# 참여가 가능한경우ㄴ %>
+          <%if !current_user.info_id%>
+         
+          <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
 
-          <!-- 작성자 -->
-
-
-          <hr>
-
-          <!-- 작성일 -->
-          <p>작성일 : <%=@postdata.created_at%></p>
-
-          <hr class="line">
-
-          <!-- Preview Image 
-          <img class="" src="http://placehold.it/900x300" alt="">
-          <hr>
-          -->
-
-          <!-- Post Content -->
-          <div class="post-content">
-            <p class="lead">글 내용</p>
-            <blockquote class="blockquote">
-            <p class="mb-0"><%=@postdata.content%></p>
-            <br>
-
-             <%# 참여가 가능한경우ㄴ %>
-              <%if !current_user.info_id%>
-             
-              <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
-
-              <%# 작성자인경우 %>
-              <%elsif @postdata.user_id == current_user.id%>
-                 <%=link_to '편집', post_edit_path(params[:p_id])%>&nbsp;&nbsp;
-                  <%=link_to '삭제', post_delpage_path(p_id: params[:p_id]), method: :post%>
-                  
-                  
-                  <%# 여기서는 글쓴사람이 글에 들어왔을때 %>
-              <%elsif current_user.info_id == @postdata.info.id%>
-                  <%=link_to '방 나가기', post_delete_join_path(p_id: params[:p_id]), method: :post ,:data => { :confirm => '나가시겠습니까?'} %>
-              <%end%>
-            </blockquote>
-          </div>
+          <%# 작성자인경우 %>
+          <%elsif @postdata.user_id == current_user.id%>
+             <%=link_to '편집', post_edit_path(params[:p_id])%>&nbsp;&nbsp;
+              <%=link_to '삭제', post_delpage_path(p_id: params[:p_id]), method: :post%>
+          <%end%>
+        </blockquote>
+      </div>
           
-
-          <hr>
+      <hr>
 
 <%# 방 접속자만 댓글을 볼 수 있다. %>
-       <div class="comments">
+      <div class="comments">
         <%if current_user.info_id == @postdata.info.id%>
 
            <div class="container">
-             <div class="card-body">
-                <%=form_for(Comment.new, url: "/comment/create",  html: {class: "form-inline"}) do |f|%> 
-                
-                 <!-- 작성된 댓글 -->
-                    <%@postdata.comments.each do |c|%>
-                      <p style="font-size: 16px">
-                        <div class="profilehover img-circle">
-                          <img src="<%=c.user.image.url%>" style="width:25px; height: 25px;" alt="">
-                        
-                          &nbsp;<%=c.user.name%> &nbsp;| &nbsp;<%=c.content%> 
-                          <br><div style="color: #6d6d6d"><%=c.created_at%></div>
-                        </div>
-                
-                        <%if current_user.id == c.user_id%>
-                          <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
-                        <%end%>
-                      </p>     
-                    <%end%>
+            <div class="card-body">
+              <%=form_for(Comment.new, url: "/comment/create",  html: {class: "form-inline"}) do |f|%> 
+              
+               <!-- 작성된 댓글 -->
+                <%@postdata.comments.each do |c|%>
+                  <p >
+                    <div class="profilehover img-circle" style="width:30px;">
+                      <img class="img-circle" src="<%=c.user.image.url%>" style="width:25px; height: 25px;" alt="">
+                    </div>
+                    <div style="font-size: 16px">
+                      <%=c.user.name%> &nbsp;| &nbsp;<%=c.content%> 
+                      <br>
+                      <div style="color: #666"><%=c.created_at%></div>
+              
+                      <%if current_user.id == c.user_id%>
+                        <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
+                      <%end%>
+                    </div>
+                  </p>     
+                <%end%>
 
-                <!-- 댓글 입력 창 -->
+              <!-- 댓글 입력 창 -->
                 <div class="write">
                   <div class="form-group">
                     <%=f.text_field :content, class: "form-control textbox"%>
@@ -98,59 +83,43 @@
                     <%=f.submit '제출', class: "submit"%>
                   </div>
                 </div>
-                <%end%>
-
+              <%end%>
             </div>
           </div>
         <%end%>
       </div>
-
-
-        </div>
-
-      </div>
-      <!-- /.row -->
     </div>
+    <div class="my-col" style="border: 2px #e88f2e solid; border-radius: 10px;">
+      <div class="container">
+        <%if current_user.info == @postdata.info%>
+        <h1>현재 참여 인원</h1><br>
+          <%@postdata.info.users.each do |u|%>
+            <div style="font-size: 16px">
+              <img class="img-circle" src = "<%=u.image.url%>" style="width:25px; height: 25px">
+              <%=u.name%>
+            </div>
+          <%end%>
+        <%end%>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <div class="container">
+    <%# 목록 가기 %>
+    <%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
+        <button class="btn btn-default">목록</button>
+    <%end%>
+    <%# 여기서는 글쓴사람이 글에 들어왔을때 %>
+    &nbsp;
+    <% if current_user.info_id == @postdata.info.id%>
+        <%=link_to post_delete_join_path(p_id: params[:p_id]), method: :post ,:data => { :confirm => '나가시겠습니까?'} do %>
+          <button class="btn btn-default">방 나가기</button>
+        <%end%>
+    <%end%>
+  </div>
+      <!-- /.row -->
+</div>
     <!-- /.container -->
 <br><br>
 
-
-
-
-          <!-- 댓글
-          <div class="container">
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-            </div>
-          </div>
-           -->
-
-           <!-- 작성된 댓글
-<div class="container">
- <%if current_user.info_id == @postdata.info.id%>
-   <%@postdata.comments.each do |c|%>
-     <p>
-       <img src="http://placehold.it/50x50" alt="">
-       &nbsp;&nbsp;<%=c.user.name%> | &nbsp;<%=c.content%> &nbsp;&nbsp;
-       <%if current_user.id == c.user_id%>
-         <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
-       <%end%>
-     </p>     
-   <%end%>
- <%end%>
-</div>
--->
-
-<div class="container">
-  <%if current_user.info == @postdata.info%>
-  <h1>나의 사람들</h1>
-    <%@postdata.info.users.each do |u|%>
-      <p><%=u.name%>님</p>
-    <%end%>
-  <%end%>
-</div>
