@@ -18,4 +18,11 @@ class MypageController < ApplicationController
 
   	redirect_to :back
   end
+  def deleteprofile
+  	user = User.find(current_user.id)
+  	user.image = ""
+  	user.save
+
+  	redirect_to :back
+  end
 end
