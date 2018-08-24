@@ -163,7 +163,7 @@ class PostController < ApplicationController
 
 
   def log_impression
-    @hit_post = Post.find(params[:id])
+    @hit_post = Dbpost.find(params[:p_id])
     @hit_post.impressions.create(ip_address: request.remote_ip,user_id:current_user.id)
   end
 
