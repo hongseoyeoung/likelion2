@@ -71,21 +71,18 @@
            <div class="container">
              <div class="card-body">
                 <%=form_for(Comment.new, url: "/comment/create",  html: {class: "form-inline"}) do |f|%> 
+                
                  <!-- 작성된 댓글 -->
                     <%@postdata.comments.each do |c|%>
-                      <p style="font-size: 16px">
-                        <img class="img-circle" src="<%=c.user.image.url%>" style="width:25px; height: 25px;" alt="">
-                        &nbsp;<%=c.user.name%> &nbsp;| &nbsp;<%=c.content%> 
-                        <br><div style="color: #6d6d6d"><%=c.created_at%></div>
-
-                
+                      <p>
+                        <img src="http://placehold.it/50x50" alt="">
+                         &nbsp;&nbsp;<%=c.user.name%> | &nbsp;<%=c.content%> &nbsp;&nbsp;
                         <%if current_user.id == c.user_id%>
                           <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
                         <%end%>
-                      </p>
-                      <br>
+                      </p>     
                     <%end%>
-                <hr>
+
                 <!-- 댓글 입력 창 -->
                 <div class="write">
                   <div class="form-group">
@@ -145,8 +142,8 @@
 -->
 
 <div class="container">
-  <h1>나의 사람들</h1>
   <%if current_user.info == @postdata.info%>
+  <h1>나의 사람들</h1>
     <%@postdata.info.users.each do |u|%>
       <p><%=u.name%>님</p>
     <%end%>
