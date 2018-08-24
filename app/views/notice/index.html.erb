@@ -1,6 +1,7 @@
-<h1><%=params[:choice]%></h1>
+<div class="title"><%=params[:choice]%></div>
 <div style="padding-top: 10%;">
 	<div class="container">
+		<div>
 		<table class="table table-bordered table-hover text-center">
 			<thead style="background-color: #EC9124;">
 				<tr>
@@ -31,5 +32,6 @@
 
 		<a href="/notice/create?choice=<%=@temp%>" class="btn btn-default pull-right">글쓰기</a>
 
+	</div>
 	</div>
 </div>
