@@ -1,3 +1,5 @@
+<%=render 'layouts/header' %>
+
 <div class="container">
   <%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
       <h5><%=@postdata.school%> <%=@postdata.menu%>(뒤로가기)</h5>
