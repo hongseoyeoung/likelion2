@@ -1,4 +1,4 @@
-<%=render 'layouts/header' %>
+<%=render "layouts/header" %>
 <%# 게시판 영역 %>
 
 <div class="container">
@@ -40,7 +40,7 @@
 		<%=link_to post_show_path(p_id: p.id) do%>
 			<div class="card">
 				<!-- 카드 헤더 -->
-				<div class="card-header">
+				<div class="card-header" style='background-image: url("<%= asset_path "#{p.menu}/#{p.brand}.png" %>')/>
 
 						<div class = "card-header-is_closed" > 
 

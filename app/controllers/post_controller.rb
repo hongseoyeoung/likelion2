@@ -16,6 +16,17 @@ class PostController < ApplicationController
     end
 
     @dbpost = Dbpost.new
+    @category = params[:menu]
+    brand_list_set
+  end
+
+  def edit
+    @postdata = Dbpost.find(params[:id])
+    if !writer_check(@postdata)
+      redirect_to '/' and return
+    end
+    @category = @postdata.menu
+    brand_list_set
   end
 
 
@@ -90,6 +101,7 @@ class PostController < ApplicationController
     post.select_style = params[:dbpost][:select_style]
     post.select_eat = params[:dbpost][:select_eat]
     post.hope_gender = params[:dbpost][:hope_gender]
+    post.brand = params[:brand]
     post.save
 
     page_redirect and return
@@ -101,6 +113,7 @@ class PostController < ApplicationController
     @d = get_times
 
     dp = Dbpost.new(postparams)
+    dp.brand = params[:brand]
     dp.user_id = current_user.id
     dp.start_time = @d
     dp.save
@@ -113,12 +126,7 @@ class PostController < ApplicationController
     page_redirect and return
   end
 
-  def edit
-    @postdata = Dbpost.find(params[:id])
-    if !writer_check(@postdata)
-      redirect_to '/' and return
-    end
-  end
+
 
 
   def show
@@ -155,6 +163,24 @@ class PostController < ApplicationController
 
 
   private
+
+    def brand_list_set
+      @brand=[]
+      if @category == '치킨'
+        @brand = ['KFC','BBQ','BHC','교촌치킨','굽네치킨', '맘스터치','호식이두마리치킨']
+      elsif  @category == '피자'
+        @brand = ['7번가피자','도미노피자','미스터피자','알볼로피자','임실치즈피자','파파존스','피자에땅','피자헛']
+      elsif  @category == '족발'
+        @brand = ['깐깐한족발','도야족발','원할머니보쌈','장충동왕족발','행복담은족발']
+      elsif  @category == '패스트푸드'
+        @brand = ['KFC','맥도날드','롯데리아','맘스터치','버거킹','파파이스']
+      elsif  @category == '분식'
+        @brand = ['신전떡볶이','신참떡볶이','아딸','엽기떡볶이','죠스떡볶이']
+      end
+      @brand.push('기타')
+    end
+
+
     def writer_check(postdata)
       if postdata.user_id != current_user.id
         return false
@@ -190,8 +216,6 @@ class PostController < ApplicationController
       end
     end
 
-
-
     def menu_list
       @arr = ['치킨','피자','중식','족발','패스트푸드','분식']
       @hour_list =['0','1','2','3','4','5','6','7','8','9','10','11']
@@ -223,6 +247,6 @@ class PostController < ApplicationController
     end
 
     def postparams
-      params.require(:dbpost).permit(:title, :content,:menu,:school,:fill_cnt,:select_style,:select_eat,:hope_gender)
+      params.require(:dbpost).permit(:title, :content,:menu,:school,:fill_cnt,:select_style,:select_eat,:hope_gender,:brand)
     end
 end
