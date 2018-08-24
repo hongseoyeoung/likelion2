@@ -19,6 +19,7 @@ gem 'impressionist'
 gem "rails_db", "1.6"
 gem 'kaminari', '< 1.0.0'
 
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.7'

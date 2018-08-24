@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'mypage/profile'
 
-  get 'sendmail/index'
+  post 'mypage/editprofile'
 
+  
   get 'mypage/index'
 
   get 'mypage/edit'
@@ -41,7 +43,7 @@ Rails.application.routes.draw do
   post 'comment/destroy'
 
   #user
-  get 'passwords/edit' 
+  get 'passwords/edit'
 
 
   # deivse gem
