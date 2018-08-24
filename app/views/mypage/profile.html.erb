@@ -6,11 +6,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<form class="form-horizontal" method="post" id="signupForm" novalidate="novalidate">
-						<div class="container">
-							<h1>
-								<%=render 'layouts/my_info'%>
-							</h1>
-						</div>
+						<%=render 'layouts/my_info'%>
 						<div style="margin-top:1em"></div>
 					</form>
 					<%= form_tag '/mypage/editprofile', method: 'post', multipart: true do %>
