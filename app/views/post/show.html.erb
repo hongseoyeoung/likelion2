@@ -140,8 +140,12 @@
  <%end%>
 </div>
 -->
-<%if current_user.info == @postdata.info%>
-  <%@postdata.info.users.each do |u|%>
-    <%=u.name%>
+
+<div class="container">
+  <h1>나의 사람들</h1>
+  <%if current_user.info == @postdata.info%>
+    <%@postdata.info.users.each do |u|%>
+      <p><%=u.name%>님</p>
+    <%end%>
   <%end%>
-<%end%>
+</div>
