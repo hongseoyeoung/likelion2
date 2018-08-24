@@ -1,9 +1,7 @@
-<body style="background-color: #F9F4EF;>
+<body style="background-color: #F9F4EF;">
 <%=render 'layouts/header' %>
 
 <div style="background-color: #F9F4EF; width: 100%;">
-<h2 style="background-color: #F9F4EF;">회원가입</h2>
-
 <table class="sign-text sign-table">
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
