@@ -74,14 +74,16 @@
                  <!-- 작성된 댓글 -->
                     <%@postdata.comments.each do |c|%>
                       <p style="font-size: 16px">
-                        <img class="img-circle" src="<%=current_user.image.url%>" style="width:25px; height: 25px;" alt="">
-                        <%=c.user.name%> | <%=c.content%> |  <%=c.created_at%>
+                        <img class="img-circle" src="<%=c.user.image.url%>" style="width:25px; height: 25px;" alt="">
+                        &nbsp;<%=c.user.name%> &nbsp;| &nbsp;<%=c.content%> 
+                        <br><div style="color: #6d6d6d"><%=c.created_at%></div>
 
                 
                         <%if current_user.id == c.user_id%>
                           <%=link_to '삭제', comment_destroy_path(id: c.id), method: :post%>
                         <%end%>
-                      </p>     
+                      </p>
+                      <br>
                     <%end%>
                 <hr>
                 <!-- 댓글 입력 창 -->

@@ -1,14 +1,6 @@
 <div class="container">
 	<h1>
-		<% if current_user.image.url.nil? %>
-			<% if current_user.gender == "남자" %>
-				<img class="img-circle" src="/male.jpg" style="width:100px; height: 100px">
-			<%else%>
-				<img class="img-circle" src="/female.jpg" style="width:100px; height: 100px">
-			<%end%>
-		<% else %>
-			<img class="img-circle" src="<%=current_user.image.url%>" style="width:100px; height: 100px">
-		<%end%>
+		<img class="img-circle" src="<%=current_user.image.url%>" style="width:100px; height: 100px">
 		<%=current_user.name%>
 	</h1>
 </div>
