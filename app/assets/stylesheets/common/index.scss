@@ -3843,7 +3843,6 @@ label {
   max-width: 100%;
   margin-bottom: 5px;
   font-family: 'NanumSquareRound';
-  font-weight: bold;
 }
 
 /* line 47, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_forms.scss */
@@ -9049,6 +9048,23 @@ button.close {
   font-family: 'NanumSquarRound';
   margin-top: 5%;
   margin-left: 19.5%;
+}
+
+/* registrations/new.html.erb >> 회원가입 */
+.sign-text{
+  font-family: 'NanumSquarRound';
+  font-size: 17px;
+  color: #331F09;
+}
+
+.btn-sign{
+  margin-top: 7%;
+}
+
+.sign-table{
+  margin-top: 7%;
+  margin-left: 38.4%;
+  background-color: #FCFBFA;
 }
 
 /* index.html.erb */
