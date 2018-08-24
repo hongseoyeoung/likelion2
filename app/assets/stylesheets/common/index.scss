@@ -20,7 +20,12 @@
   font-weight: bold;
 }
 
-
+.footer {
+  background-color: #DF7401;
+  padding-top: 30px;
+  height: 200px;
+  text-align: center;
+}
 
 /* _normalize.scss */
 /* line 9, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
@@ -78,6 +83,10 @@ a {
   background-color: transparent;
 }
 
+a:link,
+a:visited {
+  color: #000
+}
 /* line 98, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
 a:active,
 a:hover {
@@ -1938,6 +1947,7 @@ h3, .h3 {
 
 /* line 50, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_type.scss */
 h4, .h4 {
+  color: black;
   font-size: 18px;
 }
 
