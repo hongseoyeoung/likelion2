@@ -3,8 +3,9 @@
 <h1><%=params[:choice]%></h1>
 <div style="padding-top: 10%;">
 	<div class="container">
+		<div>
 		<table class="table table-bordered table-hover text-center">
-			<thead style="background-color: black;">
+			<thead style="background-color: #EC9124;">
 				<tr>
 					<th style="text-align: center; width: 650px;"><font color="white">제목</font></th>
 					<th style="text-align: center;"><font color="white">작성자</font></th>
@@ -33,5 +34,6 @@
 
 		<a href="/notice/create?choice=<%=@temp%>" class="btn btn-default pull-right">글쓰기</a>
 
+	</div>
 	</div>
 </div>
