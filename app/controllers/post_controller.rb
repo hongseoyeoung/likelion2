@@ -53,7 +53,7 @@ class PostController < ApplicationController
     current_user.save
     post_data.save
 
-    redirect_to "/post/index?school=#{post_data.school}&menu=#{post_data.menu}"
+    redirect_to :back
   end
 
 

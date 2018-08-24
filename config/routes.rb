@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  post 'mypage/edit'
   get 'mypage/profile'
 
   post 'mypage/editprofile'
