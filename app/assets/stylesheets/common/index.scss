@@ -27,6 +27,14 @@
   text-align: center;
 }
 
+.infopo {
+  a:link,
+  a:visited {
+    color: white;
+    text-decoration: none;
+  }
+}
+
 /* _normalize.scss */
 /* line 9, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_normalize.scss */
 html {
