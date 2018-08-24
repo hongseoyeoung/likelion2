@@ -27,6 +27,14 @@
 
 <br>
 <div style="text-align:right;">
+<%if current_user.info%>
+	
+	<%=link_to "/post/show?p_id=#{current_user.info.dbpost.id}" do%>
+		<button type="button" class="btn btn-info">참여중인 글
+			<span class="glyphicon">
+		</button>
+	<%end%>
+<%end%>
 	<%=link_to post_new_path(school: @school, menu: @menu) do%>
 		<button type="button" class="btn btn-info">글쓰기
 			<span class="glyphicon glyphicon-pencil">

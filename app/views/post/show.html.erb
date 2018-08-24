@@ -140,3 +140,8 @@
  <%end%>
 </div>
 -->
+<%if current_user.info == @postdata.info%>
+  <%@postdata.info.users.each do |u|%>
+    <%=u.name%>
+  <%end%>
+<%end%>
