@@ -1,11 +1,6 @@
 <div class="container">
 	<h1>
-		<%if user_signed_in?%>
-			<%if current_user.gender == "남자" && current_user.image =="닐로"%>
-				<img class="img-circle" src = "<%=asset_path 'male.jpg'%>" style="width:100px; height: 100px">
-			<%elsif current_user.image =="닐로"%>
-				<img class="img-circle" src = "<%=asset_path 'female.jpg'%>" style="width:100px; height: 100px">
-			<%end%>
-		<%end%>
+		<img class="img-circle" src = "<%=current_user.image.url%>" style="width:100px; height: 100px">
+		<%=current_user.name%>
 	</h1>
 </div>
