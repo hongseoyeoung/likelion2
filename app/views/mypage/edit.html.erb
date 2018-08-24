@@ -1,31 +1,14 @@
 <%=render 'layouts/header' %>
 <div class="container content">
 	<div class="row" style="margin-top: 1em">
-		<div class="col-md-3">
-			<ul class="list-group sidebar-nav-v1">
-				<li class="list-group-item">
-					<a href="/mypage/index">마이 페이지</a>
-				</li>
-			</ul>
-			<ul class="list-group sidebar-nav-v1">
-				<li class="list-group-item">
-					<a href="/mypage/edit">내 정보 수정</a>
-				</li>
-				<li class="list-group-item">
-					<a href="">내 매칭 정보</a>
-				</li>
-				<li class="list-group-item">
-					<a href="">내 뭐시기</a>
-				</li>
-			</ul>
-		</div>
+		<%= render 'layouts/sidebar' %>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-12">
 					<form class="form-horizontal" method="post" id="signupForm" novalidate="novalidate">
 						<div class="container">
 							<h1>
-								<img class="img-circle" src="/apple.jpg" style="width:100px; height: 100px">
+								<img class="img-circle" src="<%=current_user.image.url%>" style="width:100px; height: 100px">
 								<%=current_user.name%>
 							</h1>
 						</div>

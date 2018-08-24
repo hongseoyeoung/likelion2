@@ -13,14 +13,11 @@
 							</h1>
 						</div>
 						<div style="margin-top:1em"></div>
-						<input type="hidden" name="postkey" value="F78B14F5B0">
-						<div class = "form-group">
-							<label class="col-md-2 control-label" for="user_id">이메일</label>
-							<div class="col-md-4">
-								<input class="form-control" value="<%=current_user.email%>" disabled>
-							</div>
-						</div>
 					</form>
+					<%= form_tag '/mypage/editprofile', method: 'post', multipart: true do %>
+						<%= file_field_tag 'image' %><br> 
+						<%= submit_tag  '수정하기' %> 
+					<% end %>
 				</div>
 			</div>
 		</div>

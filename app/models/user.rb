@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :notices
   has_many :comments
   belongs_to :info, :optional => true
-
+  mount_uploader :image, ImageUploader
 end
