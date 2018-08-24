@@ -51,8 +51,14 @@
 
         <div class="form-group">
             <%= f.label :menu %><br>
-            <%= f.select(:menu, @arr, {:selected => menu}, {:class => "form-control"})%>
+            <%= f.select(:menu, @arr, {:selected => menu}, {:class => "form-control", :onchange => "change_menu(this)"}  )%>
         </div>
+
+        <%# 해당 카테고리별 브랜드 %>
+        <div class="form-group">
+            <%= f.label :브랜드 %><br>
+            <%=select_tag 'brand', options_for_select(@brand.collect{ |u| [u] }),{:class => 'form-control'}%>
+        </div>  
 
 
         <%# fill_cnt 목표인원 %>
@@ -90,6 +96,36 @@
 </div>
 
 <script>
+
+    function change_menu(data)
+    {
+        
+        var objSel = document.getElementById("brand");
+        
+        for(i=objSel.length; i>=0; i--){
+            objSel.options[i]=null;
+        }
+        var brand=[];
+        if(data.value == "치킨")
+            brand = ['KFC','BBQ','BHC','교촌치킨','굽네치킨', '맘스터치','호식이두마리치킨'];
+        else if (data.value=="피자")
+            brand = ['7번가피자','도미노피자','미스터피자','알볼로피자','임실치즈피자','파파존스','피자에땅','피자헛'];
+        else if (data.value=="족발")
+            brand = ['깐깐한족발','도야족발','원할머니보쌈','장충동왕족발','행복담은족발'];
+        else if (data.value=="패스트푸드")
+            brand = ['KFC','맥도날드','롯데리아','맘스터치','버거킹','파파이스'];
+        else if (data.value == "분식")
+            brand = ['신전떡볶이','신참떡볶이','아딸','엽기떡볶이','죠스떡볶이'];
+        
+        brand.push('기타');
+        for(var i = 0 ; i<brand.length; i++)
+        {
+            var objOption = document.createElement("option");        
+            objOption.text = brand[i];
+            objOption.value = brand[i];
+            objSel.options.add(objOption);
+        }
+    }
 
     function change_hour(data)
     {

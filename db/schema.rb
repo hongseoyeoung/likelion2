@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180818114441) do
+ActiveRecord::Schema.define(version: 20180824081336) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180818114441) do
     t.string   "select_style"
     t.string   "select_eat"
     t.string   "hope_gender"
+    t.string   "brand"
     t.index ["user_id"], name: "index_dbposts_on_user_id"
   end
 
