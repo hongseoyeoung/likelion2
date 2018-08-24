@@ -1,37 +1,65 @@
-<h2>Sign up</h2>
+<header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <%=link_to '덮집회의', root_path, id: 'logo'%>
+      <nav>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in?%>
+            <li style="margin-top: 14px;"><p style="color: white"><%= current_user.name %>님 환영합니다</p></li>
+
+          <%end%>
+
+            <li><%=link_to '공지사항', href='/notice/index?choice=공지사항'%></li>
+      
+            <li><%=link_to '고객센터', href='/notice/index?choice=고객센터'%></li>
+            
+            <% if user_signed_in?%>
+              <li><%=link_to '마이페이지', href='/mypage/index' %></li>
+              <li><%=link_to '로그아웃', destroy_user_session_path, :data => {:confirm => '로그아웃하시겠습니까?'}, method: :delete %></li>
+              <%else%>
+              <li><%=link_to '로그인', new_user_session_path%></li>
+            <%end%>
+        </ul>
+      </nav>
+    </div>
+</header>
+
+
+<div class="container" style="align-content: center;">
+
+<h2 style="padding-left: 250px;">회원가입</h2><br><br>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
-     <div class="field">
+     <div class="field" style="padding-left: 230px;">
       <%= f.label :name %><br />
-      <%= f.text_field :name,class: "form-control", autofocus: true %>
-    </div>
+      <%= f.text_field :name, autofocus: true %>
+    </div><br>
 
     
-    <div class="btn-group" data-toggle="buttons">
+    <div class="btn-group" data-toggle="buttons" style="padding-left: 230px;">
       <%= f.label :성별 %><br>
         <%= f.label :남자 %>
           <%= f.radio_button :gender, '남자', :checked => true %> 
         <%= f.label :여자 %>
         <%= f.radio_button :gender, '여자', :checked => true%> 
-    </div>
+    </div><br>
   <div class="form-inputs">
-    <%= f.input :email,
+    <%= f.input :email, class: "form-control",
                 required: true,
                 autofocus: true ,
-                input_html: { autocomplete: "email" }%>
+                input_html: { autocomplete: "email" }%><br>
     <%= f.input :password,
                 required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
+                placehold: "#{@minimum_password_length}자 이상 입력해주세요",
+                input_html: { autocomplete: "new-password" } %><br>
     <%= f.input :password_confirmation,
                 required: true,
-                input_html: { autocomplete: "new-password" } %>
+                input_html: { autocomplete: "new-password" } %><br>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
   </div>
+  
 <% end %>
-
-<%= render "devise/shared/links" %>
+</div>

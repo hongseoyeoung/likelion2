@@ -1,6 +1,7 @@
 class PostController < ApplicationController 
   before_action :logincheck, only: [:create, :delete_join, :delpage, :edit,:join,:new,:show]
   before_action :menu_list, only: [:new, :edit]
+  before_action :log_impression, only: [:show]
 
   def index
     paramscheck
@@ -159,6 +160,13 @@ class PostController < ApplicationController
 
     redirect_to "/post/index?school=#{postdata.school}&menu=#{postdata.menu}"
   end
+
+
+  def log_impression
+    @hit_post = Post.find(params[:id])
+    @hit_post.impressions.create(ip_address: request.remote_ip,user_id:current_user.id)
+  end
+
 
 
 
