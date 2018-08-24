@@ -3,32 +3,48 @@
 <link href="index.scss" rel="stylesheet">
 
 <div class="login">
-  <h2>Log in</h2>
+  <h2 class="LOGO">LOGO</h2>
+  <hr color="#EC9124" align="center" size="4px" width="63%" nonshade>
 
-  <div>
-  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-inputs">
-      <div><a class="ID">아이디</a>
-        <%= f.text_field :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-      </div>
-      <div class="inputs"><a class="PW">비밀번호</a>
-          <%= f.password_field :password,
-                required: false,
-                input_html: { autocomplete: "current-password" }%>
-      </div>
-      <div class="remember-me">
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-      </div>
-    </div>
+<table class="login-table">
+ <tr style="width: 500px; height: 120px;">
+  <td class="form-inputs" style="width: 200px; height: 100px;">
+  <div class="login-form">
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+     
+              <div><a class="ID">아이디</a>
+                   <%= f.text_field :email,
+                      required: false,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+              </div>
+          <div class="inputs"><a class="PW">비밀번호</a>
+                   <%= f.password_field :password,
+                      required: false,
+                      input_html: { autocomplete: "current-password" }%>
+          </div>
+          <div class="remember-me">
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+          </div>
 
-    <div class="form-actions">
-     <%= f.button :submit, "Log in" %>
-    </div>
-  <% end %>
+          <div>
+            <%= render "devise/shared/links" %>
+          </div>
+     
+      </td>
 
-  <%= render "devise/shared/links", class: "login" %>
-</div>
-</div>
+         <td style="width: 200px; height: 100px;">
+          
+              <%= f.button :submit, "로그인", class: "btn-primary btn-login" %>
+        
+      <% end %>
+    </td>
+
+    <td>
+      <div><img src="<%=asset_path 'logopic.jpg'%>"></div>
+    </td>
+  </tr>
+</table>
+      <hr color="#EC9124" align="center" size="4px" width="63%" nonshade>
+      
+  </div>

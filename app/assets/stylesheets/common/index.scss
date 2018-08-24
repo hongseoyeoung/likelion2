@@ -4560,15 +4560,17 @@ a.btn.disabled, fieldset[disabled] a.btn {
 /* line 71, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #F4A312;
+  border-color: #EC9124;
 }
+
 /* line 11, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
   background-color: #286090;
   border-color: #122b40;
 }
+
 /* line 17, /home/vagrant/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:hover {
   color: #fff;
@@ -8965,32 +8967,60 @@ button.close {
 }
 
 .form-inputs{
-  margin-top: 5%;
-  margin-left: 40%;
+  margin-top: 3%;
+  margin-left: 20%;
 }
 
 .inputs{
-  margin-top: 1%;
+  margin-top: 1.4%;
 }
 
 .remember-me{
-  margin-left: 3.8%;
+  font-family: 'NanumSquarRound';
+  color: #331F09;
+  margin-top: 1.4%;
+  margin-left: 10.1%;
 }
 
 .form-actions{
   margin-left: 40%;
-  margin-bottom: 5%;
+  margin-bottom: 10%;
 
 }
 
 .ID{
   font-family: 'NanumSquarRound';
-  margin-right: 19px;
+  font-size: 17px;
+  color: #331F09;
+  margin-bottom: 5%;
 }
 
 .PW{
   font-family: 'NanumSquarRound';
-  margin-right: 5px;
+  font-size: 17px;
+  color: #331F09;
+  margin-bottom: 5%;
+}
+
+.render{
+  font-family: 'NanumSquarRound';
+  color: #EC9124; 
+}
+
+.login-table{
+  margin-left: 20.57%;
+}
+
+.btn-login{
+  margin-bottom: 60px;
+  width: 100px;
+  height: 85px;
+}
+
+.LOGO{
+  font-family: 'NanumSquarRound';
+  margin-top: 5%;
+  margin-left: 19.5%;
 }
 
 /* index.html.erb */
@@ -9000,3 +9030,4 @@ button.close {
   margin-left: 10%;
   clear: both;
 }
+
