@@ -6,14 +6,13 @@
       <%= f.label :name %><br />
       <%= f.text_field :name,class: "form-control", autofocus: true %>
     </div>
-
     
     <div class="btn-group" data-toggle="buttons">
       <%= f.label :성별 %><br>
         <%= f.label :남자 %>
           <%= f.radio_button :gender, '남자', :checked => true %> 
         <%= f.label :여자 %>
-        <%= f.radio_button :gender, '여자', :checked => true%> 
+        <%= f.radio_button :gender, '여자', :checked => true%>
     </div>
   <div class="form-inputs">
     <%= f.input :email,

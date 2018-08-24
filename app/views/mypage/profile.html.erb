@@ -8,16 +8,19 @@
 					<form class="form-horizontal" method="post" id="signupForm" novalidate="novalidate">
 						<div class="container">
 							<h1>
-								<img class="img-circle" src="<%=current_user.image.url%>" style="width:100px; height: 100px">
-								<%=current_user.name%>
+								<%=render 'layouts/my_info'%>
 							</h1>
 						</div>
 						<div style="margin-top:1em"></div>
 					</form>
 					<%= form_tag '/mypage/editprofile', method: 'post', multipart: true do %>
-						<%= file_field_tag 'image' %><br> 
-						<%= submit_tag  '수정하기' %> 
+						<%= file_field_tag 'image', class:"btn btn-default"%><br> 
+						<%= submit_tag  '수정하기', class:"btn btn-default" %> 
 					<% end %>
+					<!--<br>
+					<%= form_tag '/mypage/deleteprofile', method: 'post', multipart: true do %>
+						<%= submit_tag  '삭제하기', class:"btn btn-default"%> 
+					<% end %>-->
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   post 'mypage/editprofile'
 
-  
+  post 'mypage/deleteprofile'
+
   get 'mypage/index'
 
   get 'mypage/edit'
