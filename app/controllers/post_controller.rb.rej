@@ -1,0 +1,10 @@
+diff a/app/controllers/post_controller.rb b/app/controllers/post_controller.rb	(rejected hunks)
+@@ -163,7 +163,7 @@
+ 
+ 
+   def log_impression
+-    @hit_post = Post.find(params[:id])
++    @hit_post = Dbpost.find(params[:p_id])
+     @hit_post.impressions.create(ip_address: request.remote_ip,user_id:current_user.id)
+   end
+ 

@@ -21,7 +21,7 @@
 }
 
 .footer {
-  background-color: #DF7401;
+  background-color: #EC9124;
   padding-top: 30px;
   height: 200px;
   text-align: center;
@@ -9062,18 +9062,9 @@ button.close {
 }
 
 .sign-table{
-  margin-top: 1.5%;
+  margin-top: 7%;
   margin-left: 38.4%;
-  font-family: 'NanumSquareRound';
-  color: #331F09;
   background-color: #FCFBFA;
-}
-
-.sign-title{
-  margin-top: 5%;
-  margin-left: 44.7%;
-  font-family: 'NanumSquareRound';
-  color: #331F09;
 }
 
 /* index.html.erb */
@@ -9084,3 +9075,7 @@ button.close {
   clear: both;
 }
 
+/* footer */
+.footer-text{
+  padding-top: 2%;
+}
