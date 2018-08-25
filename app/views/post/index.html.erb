@@ -67,24 +67,18 @@
 						<!--  카드 바디 헤더 -->
 
 						<div class="card-body-header">
+							<h1><%= p.title%></h1>
 
-							<h1> <%= p.title%></h1>
+							<p class="card-body-hashtag">#<%=p.select_style%> #<%=p.select_eat%> 
+								<%if p.hope_gender == "동성"%>
+									#<%=User.find(p.user_id).gender%>						
+								<%else%>
+									#<%=p.hope_gender%>
+								<%end%>
+							</p>
 
-						<p class="card-body-hashtag">#<%=p.select_style%> #<%=p.select_eat%> 
-						<%if p.hope_gender == "동성"%>
-						#<%=User.find(p.user_id).gender%>						
-						<%else%>
-						#<%=p.hope_gender%>
-						<%end%>
-						</p>
-						
-
-							<p class = "card-body-nickname"> 
-
-											시작시간: <%=p.start_time.strftime("%_m/%-d %p %l:%M")%>
-
-									</p>
-
+							<p class = "card-body-nickname">시작시간: <%=p.start_time.strftime("%_m/%-d %p %l:%M")%></p>
+									
 						</div>
 
 						<p class="card-body-description">
