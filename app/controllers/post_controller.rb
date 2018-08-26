@@ -132,7 +132,7 @@ class PostController < ApplicationController
 
   def show
     @postdata = Dbpost.find(params[:p_id])
-
+    @temp=0
   end
   
   def delete_join

@@ -34,13 +34,7 @@
 
            <%# 참여가 가능한경우ㄴ %>
           <%if !current_user.info_id%>
-         
-          <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
-
-          <%# 작성자인경우 %>
-          <%elsif @postdata.user_id == current_user.id%>
-             <%=link_to '편집', post_edit_path(params[:p_id])%>&nbsp;&nbsp;
-              <%=link_to '삭제', post_delpage_path(p_id: params[:p_id]), method: :post%>
+             <%=link_to '참여하기', post_join_path(p_id: params[:p_id]), :data => { :confirm => '참여하시겠습니까?'} %>
           <%end%>
         </blockquote>
       </div>
@@ -110,13 +104,27 @@
     <%= link_to "/post/index?school=#{@postdata.school}&menu=#{@postdata.menu}" do%>
         <button class="btn btn-default">목록</button>
     <%end%>
-    <%# 여기서는 글쓴사람이 글에 들어왔을때 %>
+    
     &nbsp;
-    <% if current_user.info_id == @postdata.info.id%>
+    <%@postdata.info.users.each do |u|%>
+      <%if current_user == u%>
+        <%@temp = @temp+1%>
+      <%end%>
+    <%end%>
+
+    <% if @postdata.user == current_user%>
+        <%=link_to post_edit_path(params[:p_id]) do%>
+           <button class="btn btn-default">편집</button>
+        <%end%>
+        <%=link_to post_delete_join_path(p_id: params[:p_id]), method: :post ,:data => { :confirm => '삭제하시겠습니까?'} do %>
+          <button class="btn btn-default">글 삭제</button>
+        <%end%>
+      <%elsif @temp == 1%>
         <%=link_to post_delete_join_path(p_id: params[:p_id]), method: :post ,:data => { :confirm => '나가시겠습니까?'} do %>
           <button class="btn btn-default">방 나가기</button>
         <%end%>
-    <%end%>
+        <%@temp = 0%>
+     <%end%>
   </div>
       <!-- /.row -->
 </div>
